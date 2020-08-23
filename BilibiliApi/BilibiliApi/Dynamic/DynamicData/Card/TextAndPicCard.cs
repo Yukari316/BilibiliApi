@@ -52,7 +52,7 @@ namespace BilibiliApi.Dynamic.DynamicData.Card
                     messageBuilder.Append(EmojiToUrl(Description));
                     break;
                 case ContentType.CQCode:
-                    messageBuilder.Append(messageBuilder.Append(EmojiToCQCode(Description)));
+                    messageBuilder.Append(EmojiToCQCode(Description));
                     break;
             }
             messageBuilder.Append('\n');
