@@ -8,7 +8,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/CBGan/BilibiliApi</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>0.1.4</Version>
+    <Version>0.1.6</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>

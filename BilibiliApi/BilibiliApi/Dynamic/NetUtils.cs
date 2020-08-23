@@ -35,8 +35,9 @@ namespace BilibiliApi.Dynamic
         /// </summary>
         /// <param name="uid">用户ID</param>
         /// <param name="cardType">动态类型</param>
+        /// <param name="index">想要获取动态的位置(最大值12),默认为0(最新动态)</param>
         /// <returns></returns>
-        public static JObject GetBiliDynamicJson(long uid,out CardType cardType)
+        public static JObject GetBiliDynamicJson(long uid,out CardType cardType,int index = 0)
         {
             //响应JSON
             JObject cardJObject;
@@ -49,10 +50,16 @@ namespace BilibiliApi.Dynamic
                     cardType = (CardType) (-1);
                     return null;
                 }
-                //检查是否是置顶动态[4]
-                cardJObject = (int)dataJObject["data"]?["cards"]?[0]?["extra"]?["is_space_top"] == 0
-                    ? JObject.Parse(dataJObject["data"]?["cards"]?[0]?.ToString() ?? string.Empty)
-                    : JObject.Parse(dataJObject["data"]?["cards"]?[1]?.ToString() ?? string.Empty);
+                if (index == 0)
+                {
+                    cardJObject = (int)dataJObject["data"]?["cards"]?[0]?["extra"]?["is_space_top"] == 0
+                        ? JObject.Parse(dataJObject["data"]?["cards"]?[0]?.ToString() ?? string.Empty)
+                        : JObject.Parse(dataJObject["data"]?["cards"]?[1]?.ToString() ?? string.Empty);
+                }
+                else
+                {
+                    cardJObject = JObject.Parse(dataJObject["data"]?["cards"]?[index]?.ToString() ?? string.Empty);
+                }
                 cardType = Enum.IsDefined(typeof(CardType), (int) cardJObject["desc"]?["type"])
                     ? (CardType) ((int) cardJObject["desc"]?["type"])
                     : CardType.Unknown;

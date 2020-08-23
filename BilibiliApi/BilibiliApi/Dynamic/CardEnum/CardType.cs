@@ -7,6 +7,10 @@ namespace BilibiliApi.Dynamic.CardEnum
         /// </summary>
         Unknown = 0,
         /// <summary>
+        /// 转发
+        /// </summary>
+        Forward = 1,
+        /// <summary>
         /// 纯文本动态
         /// </summary>
         TextAndPic = 2,

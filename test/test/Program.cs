@@ -31,6 +31,15 @@ namespace test
                     Console.WriteLine(textAndPicCard.ToString());
                     card = textAndPicCard;
                     break;
+                case CardType.Forward:
+                    ForwardCard forwardCard = new ForwardCard(cardData);
+                    forwardCard.ContentType = ContentType.CQCode;
+                    Console.WriteLine(forwardCard.ToString());
+                    Console.WriteLine($"\nOrginUrl:{forwardCard.GetOrginUrl(out CardType orginType)}");
+                    Console.WriteLine($"OrginType:{orginType}");
+                    Console.WriteLine($"OrginJson:{forwardCard.OrginJson}");
+                    card = forwardCard;
+                    break;
             }
             //动态链接
             Console.WriteLine($"DynamicUrl:{card.GetDynamicUrl()}");

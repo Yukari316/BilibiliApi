@@ -42,7 +42,7 @@ namespace BilibiliApi.Dynamic.DynamicData.Card
         /// <summary>
         /// 获取动态的文本
         /// </summary>
-        /// <returns>将数据转换为含有CQ码的文本</returns>
+        /// <returns>将数据转换为格式化文本</returns>
         public override string ToString()
         {
             StringBuilder messageBuilder = new StringBuilder();
