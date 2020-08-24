@@ -56,9 +56,9 @@ namespace BilibiliApi.Dynamic.DynamicData.Card
         public override string ToString()
         {
             StringBuilder messageBuilder = new StringBuilder();
-            messageBuilder.Append("转发自");
+            messageBuilder.Append("转发的动态:\n");
             messageBuilder.Append(GetUserInfo().UserName);
-            messageBuilder.Append("的动态:\n");
+            messageBuilder.Append(":");
             switch (ContentType)
             {
                 case ContentType.Url:

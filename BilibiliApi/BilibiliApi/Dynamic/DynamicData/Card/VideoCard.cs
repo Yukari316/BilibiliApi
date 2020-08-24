@@ -95,7 +95,7 @@ namespace BilibiliApi.Dynamic.DynamicData.Card
                     messageBuilder.Append(ImgUrlToCQCode(CoverUrl));
                     break;
             }
-            messageBuilder.Append("\n\n视频链接：");
+            messageBuilder.Append("\n\nLink：");
             messageBuilder.Append(GetAvUrl());
             return messageBuilder.ToString();
         }
