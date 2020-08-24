@@ -13,7 +13,7 @@ namespace test
         static void Main(string[] args)
         {
             //获取指定用户的最新动态
-            JObject cardData = NetUtils.GetBiliDynamicJson(353840826, out CardType cardType);
+            JObject cardData = NetUtils.GetBiliDynamicJson(353840826, out CardType cardType,0, "425453116681709516");
             Dynamic card     = new Dynamic();
             switch (cardType)
             {
@@ -43,6 +43,8 @@ namespace test
             }
             //动态链接
             Console.WriteLine($"DynamicUrl:{card.GetDynamicUrl()}");
+            //下一页offset
+            Console.WriteLine($"NextOffset:{card.NextPageOffset}");
             //获取发送者的信息
             UserInfo sender = card.GetUserInfo();
             //UID

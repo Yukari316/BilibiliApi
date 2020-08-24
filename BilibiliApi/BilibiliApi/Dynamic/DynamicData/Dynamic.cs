@@ -70,6 +70,12 @@ namespace BilibiliApi.Dynamic.DynamicData
         /// </summary>
         protected JObject ExtendJson { set; get; }
         /// <summary>
+        /// <para>第二页动态的offset</para>
+        /// <para>[字段:JSON.data.next_page]</para>
+        /// <para>此字段由框架自动添加</para>
+        /// </summary>
+        public string NextPageOffset{ set; get; }
+        /// <summary>
         /// <para>文本消息类型</para>
         /// <para>默认为Url格式</para>
         /// </summary>
@@ -192,6 +198,7 @@ namespace BilibiliApi.Dynamic.DynamicData
             Card            = JObject.Parse(root["card"]?.ToString()        ?? "{}");
             ExtendJson      = JObject.Parse(root["extend_json"]?.ToString() ?? "{}");
             ContentType     = ContentType.Url;
+            NextPageOffset  = root["next_page"]?.ToString();
         }
         #endregion
     }

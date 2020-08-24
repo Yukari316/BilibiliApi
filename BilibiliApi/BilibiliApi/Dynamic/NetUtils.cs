@@ -17,11 +17,11 @@ namespace BilibiliApi.Dynamic
         /// <param name="uid"></param>
         /// <param name="offset"></param>
         /// <returns></returns>
-        internal static string GetDynamicUrl(long uid, long offset = 0)
+        internal static string GetDynamicUrl(ulong uid, string offset = "0")
         {
-            Dictionary<string, long> urlParams = new Dictionary<string, long>
+            Dictionary<string, string> urlParams = new Dictionary<string, string>
             {
-                {"host_uid", uid},
+                {"host_uid", uid.ToString()},
                 {"offset_dynamic_id", offset}
             };
             StringBuilder urlBuilder = new StringBuilder();
@@ -35,15 +35,18 @@ namespace BilibiliApi.Dynamic
         /// </summary>
         /// <param name="uid">用户ID</param>
         /// <param name="cardType">动态类型</param>
-        /// <param name="index">想要获取动态的位置(最大值12),默认为0(最新动态)</param>
+        /// <param name="index">想要获取动态的位置(最大值11),默认为0(最新动态)</param>
+        /// <param name="pageOffset">动态页offset</param>
         /// <returns></returns>
-        public static JObject GetBiliDynamicJson(long uid,out CardType cardType,int index = 0)
+        public static JObject GetBiliDynamicJson(ulong uid,out CardType cardType,uint index = 0,string pageOffset = "0")
         {
+            if (string.IsNullOrEmpty(pageOffset)) throw new NullReferenceException("pageOffset is null");
+            if (index > 11) throw new ArgumentOutOfRangeException(nameof(index));
             //响应JSON
             JObject cardJObject;
             try
             {
-                JObject dataJObject = JObject.Parse(GetHttpResponse(GetDynamicUrl(uid)));
+                JObject dataJObject = JObject.Parse(GetHttpResponse(GetDynamicUrl(uid, pageOffset)));
                 string  code        = dataJObject["code"]?.ToString();
                 if (code == null || !code.Equals("0"))
                 {
@@ -63,6 +66,7 @@ namespace BilibiliApi.Dynamic
                 cardType = Enum.IsDefined(typeof(CardType), (int) cardJObject["desc"]?["type"])
                     ? (CardType) ((int) cardJObject["desc"]?["type"])
                     : CardType.Unknown;
+                cardJObject["next_page"] = dataJObject["data"]?["next_offset"];
             }
             catch (Exception e)
             {
