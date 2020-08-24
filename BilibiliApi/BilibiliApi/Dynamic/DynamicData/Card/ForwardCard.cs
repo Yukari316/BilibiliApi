@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using BilibiliApi.Dynamic.CardEnum;
 using Newtonsoft.Json.Linq;
@@ -29,7 +27,7 @@ namespace BilibiliApi.Dynamic.DynamicData.Card
         /// <para>源动态JSON</para>
         /// <para>[字段:JSON.origin]</para>
         /// </summary>
-        public JObject OrginJson { private set; get; }
+        private JObject OrginJson { get; }
         #endregion
 
         #region 构造方法
@@ -78,7 +76,15 @@ namespace BilibiliApi.Dynamic.DynamicData.Card
         public string GetOrginUrl(out CardType orginCardType)
         {
             orginCardType = OrginType;
+            if (Content == null || OrginDynamicId == null || CardType == CardType.Unknown) return null;
             return $"https://t.bilibili.com/{OrginDynamicId}";
+        }
+
+        public JObject GetOrginJson(out CardType orginCardType)
+        {
+            orginCardType = OrginType;
+            if (Content == null || OrginDynamicId == null || CardType == CardType.Unknown) return null;
+            return OrginJson;
         }
         #endregion
     }

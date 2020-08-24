@@ -37,7 +37,7 @@ namespace test
                     Console.WriteLine(forwardCard.ToString());
                     Console.WriteLine($"\nOrginUrl:{forwardCard.GetOrginUrl(out CardType orginType)}");
                     Console.WriteLine($"OrginType:{orginType}");
-                    Console.WriteLine($"OrginJson:{forwardCard.OrginJson}");
+                    Console.WriteLine($"OrginJson:{forwardCard.GetOrginJson(out orginType)}");
                     card = forwardCard;
                     break;
             }
