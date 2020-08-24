@@ -41,8 +41,8 @@ namespace BilibiliApi.Dynamic.DynamicData.Card
             //源动态ID
             OrginDynamicId = Card["item"]?["orig_dy_id"]?.ToString();
             //源动态类型
-            OrginType = Enum.IsDefined(typeof(CardType), (int)Card["item"]?["orig_type"])
-                ? (CardType)((int)Card["item"]?["orig_type"])
+            OrginType = Enum.IsDefined(typeof(CardType), (int) (Card["item"]?["orig_type"] ?? 0))
+                ? (CardType) (int) (Card["item"]?["orig_type"] ?? 0)
                 : CardType.Unknown;
             //源动态数据
             OrginJson = JObject.Parse(Card["origin"]?.ToString() ?? "{}");

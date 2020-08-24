@@ -19,6 +19,10 @@ namespace BilibiliApi.Dynamic.CardEnum
         /// </summary>
         PlainText = 4,
         /// <summary>
+        /// 视频动态
+        /// </summary>
+        Video = 8,
+        /// <summary>
         /// 直播间动态
         /// </summary>
         //Live = 4200

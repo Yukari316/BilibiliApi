@@ -188,13 +188,13 @@ namespace BilibiliApi.Dynamic.DynamicData
                 }
             }
             //写入数据
-            Uid             = (long)root["desc"]?["uid"];
+            Uid             = (long)(root["desc"]?["uid"] ?? 0);
             DynamicId       = root["desc"]?["dynamic_id_str"]?.ToString();
-            UpdateTimeStemp = (long)root["desc"]?["timestamp"];
+            UpdateTimeStemp = (long)(root["desc"]?["timestamp"] ?? 0);
             UserName        = root["desc"]?["user_profile"]?["info"]?["uname"]?.ToString();
             FaceUrl         = root["desc"]?["user_profile"]?["info"]?["face"]?.ToString();
             EmojiData       = emojiData;
-            CardType        = (CardType)((int)root["desc"]?["type"]);
+            CardType        = (CardType)(int)(root["desc"]?["type"]         ?? 0);
             Card            = JObject.Parse(root["card"]?.ToString()        ?? "{}");
             ExtendJson      = JObject.Parse(root["extend_json"]?.ToString() ?? "{}");
             ContentType     = ContentType.Url;

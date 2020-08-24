@@ -13,7 +13,7 @@ namespace test
         static void Main(string[] args)
         {
             //获取指定用户的最新动态
-            JObject cardData = NetUtils.GetBiliDynamicJson(353840826, out CardType cardType,0, "425453116681709516");
+            JObject cardData = NetUtils.GetBiliDynamicJson(797614, out CardType cardType);
             Dynamic card     = new Dynamic();
             switch (cardType)
             {
@@ -40,6 +40,13 @@ namespace test
                     Console.WriteLine($"OrginJson:{forwardCard.GetOrginJson(out orginType)}");
                     card = forwardCard;
                     break;
+                case CardType.Video:
+                    VideoCard videoCard = new VideoCard(cardData);
+                    videoCard.ContentType = ContentType.CQCode;
+                    videoCard.FullInfo = true;
+                    Console.WriteLine(videoCard.ToString());
+                    card = videoCard;
+                    break;
             }
             //动态链接
             Console.WriteLine($"DynamicUrl:{card.GetDynamicUrl()}");
@@ -53,7 +60,9 @@ namespace test
             Console.WriteLine($"SenderName:{sender.UserName}");
             //用户头像图片链接
             Console.WriteLine($"SenderFace:{sender.FaceUrl}");
+            //源数据
+            Console.WriteLine($"\n\nsource data:{cardData}");
             Console.ReadLine();
-        }
+        }   
     }
 }
