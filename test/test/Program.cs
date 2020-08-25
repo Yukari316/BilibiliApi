@@ -13,7 +13,7 @@ namespace test
         static void Main(string[] args)
         {
             //获取指定用户的最新动态
-            JObject cardData = NetUtils.GetBiliDynamicJson(386900246, out CardType cardType);
+            JObject cardData = NetUtils.GetBiliDynamicJson(1473830, out CardType cardType);
             Dynamic card     = new Dynamic();
             switch (cardType)
             {

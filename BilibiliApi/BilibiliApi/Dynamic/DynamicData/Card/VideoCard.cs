@@ -50,7 +50,7 @@ namespace BilibiliApi.Dynamic.DynamicData.Card
             //标题
             Title = Card["title"]?.ToString();
             //视频封面链接
-            CoverUrl = Card["title"]?.ToString();
+            CoverUrl = Card["pic"]?.ToString();
             //视频简介
             Desc = Card["desc"]?.ToString();
             //视频话题
