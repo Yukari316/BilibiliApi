@@ -1,9 +1,9 @@
 using System;
 using System.Text;
-using BilibiliApi.Dynamic.CardEnum;
+using BilibiliApi.Dynamic.Enums;
 using Newtonsoft.Json.Linq;
 
-namespace BilibiliApi.Dynamic.DynamicData.Card
+namespace BilibiliApi.Dynamic.Models.Card
 {
     public class ForwardCard : Dynamic
     {
@@ -73,6 +73,7 @@ namespace BilibiliApi.Dynamic.DynamicData.Card
         /// <summary>
         /// 获取源动态的链接
         /// </summary>
+        /// <param name="orginCardType">源动态类型</param>
         public string GetOrginUrl(out CardType orginCardType)
         {
             orginCardType = OrginType;
@@ -80,6 +81,10 @@ namespace BilibiliApi.Dynamic.DynamicData.Card
             return $"https://t.bilibili.com/{OrginDynamicId}";
         }
 
+        /// <summary>
+        /// 获取源动态的数据
+        /// </summary>
+        /// <param name="orginCardType">源动态类型</param>
         public JObject GetOrginJson(out CardType orginCardType)
         {
             orginCardType = OrginType;

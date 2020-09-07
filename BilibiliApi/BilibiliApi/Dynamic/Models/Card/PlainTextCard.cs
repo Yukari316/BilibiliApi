@@ -1,6 +1,6 @@
 using Newtonsoft.Json.Linq;
 
-namespace BilibiliApi.Dynamic.DynamicData.Card
+namespace BilibiliApi.Dynamic.Models.Card
 {
     public class PlainTextCard : Dynamic
     {
@@ -9,7 +9,7 @@ namespace BilibiliApi.Dynamic.DynamicData.Card
         /// <para>动态内容</para>
         /// <para>[字段:JSON.item.content]</para>
         /// </summary>
-        private string Content { get; }
+        public string Content { get; }
         #endregion
 
         #region 构造函数

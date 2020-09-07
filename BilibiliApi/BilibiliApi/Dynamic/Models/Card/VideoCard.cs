@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json.Linq;
 
-namespace BilibiliApi.Dynamic.DynamicData.Card
+namespace BilibiliApi.Dynamic.Models.Card
 {
     public class VideoCard : Dynamic
     {
@@ -13,27 +13,27 @@ namespace BilibiliApi.Dynamic.DynamicData.Card
         /// <para>AV号</para>
         /// <para>[字段:JSON.aid]</para>
         /// </summary>
-        private long AvID{ set; get; }
+        public long AvID{ get; }
         /// <summary>
         /// <para>视频标题</para>
         /// <para>[字段:JSON.title]</para>
         /// </summary>
-        private string Title{ set; get; }
+        public string Title { get; }
         /// <summary>
         /// <para>封面链接</para>
         /// <para>[字段:JSON.pic]</para>
         /// </summary>
-        private string CoverUrl{ set; get; }
+        public string CoverUrl { get; }
         /// <summary>
         /// <para>视频简介</para>
         /// <para>[字段:JSON.desc]</para>
         /// </summary>
-        private string Desc { set; get; }
+        public string Desc { get; }
         /// <summary>
         /// <para>视频话题</para>
         /// <para>[字段:JSON.dynamic]</para>
         /// </summary>
-        private List<string> CardDynamic { set; get; }
+        public List<string> CardDynamic { get; }
 
         public bool FullInfo { set; get; }
         #endregion

@@ -1,7 +1,11 @@
-namespace BilibiliApi.Dynamic.CardEnum
+namespace BilibiliApi.Dynamic.Enums
 {
     public enum CardType
     {
+        /// <summary>
+        /// 错误
+        /// </summary>
+        Error = 0,
         /// <summary>
         /// 未知类型
         /// </summary>
@@ -11,11 +15,11 @@ namespace BilibiliApi.Dynamic.CardEnum
         /// </summary>
         Forward = 1,
         /// <summary>
-        /// 纯文本动态
+        /// 图片动态
         /// </summary>
         TextAndPic = 2,
         /// <summary>
-        /// 图片动态
+        /// 纯文本动态
         /// </summary>
         PlainText = 4,
         /// <summary>

@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BilibiliApi.Dynamic.CardEnum;
+using BilibiliApi.Dynamic.Enums;
 using Newtonsoft.Json.Linq;
 
-namespace BilibiliApi.Dynamic.DynamicData
+namespace BilibiliApi.Dynamic.Models
 {
     /// <summary>
     /// 动态数据类型

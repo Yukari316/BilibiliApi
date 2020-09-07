@@ -1,9 +1,11 @@
 using System;
 using BilibiliApi;
 using BilibiliApi.Dynamic;
-using BilibiliApi.Dynamic.CardEnum;
-using BilibiliApi.Dynamic.DynamicData;
-using BilibiliApi.Dynamic.DynamicData.Card;
+using BilibiliApi.Dynamic.Enums;
+using BilibiliApi.Dynamic.Models;
+using BilibiliApi.Dynamic.Models.Card;
+using BilibiliApi.Live;
+using BilibiliApi.Live.Models;
 using Newtonsoft.Json.Linq;
 
 namespace test
@@ -12,8 +14,16 @@ namespace test
     {
         static void Main(string[] args)
         {
+            #region LiveAPI
+            LiveStatus liveStatus = LiveAPIs.GetLiveStatus(339567211);
+            Console.WriteLine($"live status:{liveStatus.Status}");
+            Console.WriteLine($"live room id:{liveStatus.RoomId}");
+            Console.ReadLine();
+            #endregion
+
+            #region 动态API
             //获取指定用户的最新动态
-            JObject cardData = NetUtils.GetBiliDynamicJson(1473830, out CardType cardType);
+            JObject cardData = DynamicAPIs.GetBiliDynamicJson(1473830, out CardType cardType);
             Dynamic card     = new Dynamic();
             switch (cardType)
             {
@@ -43,7 +53,7 @@ namespace test
                 case CardType.Video:
                     VideoCard videoCard = new VideoCard(cardData);
                     videoCard.ContentType = ContentType.CQCode;
-                    videoCard.FullInfo = true;
+                    videoCard.FullInfo    = true;
                     Console.WriteLine(videoCard.ToString());
                     card = videoCard;
                     break;
@@ -63,6 +73,7 @@ namespace test
             //源数据
             Console.WriteLine($"\n\nsource data:{cardData}");
             Console.ReadLine();
+            #endregion
         }   
     }
 }

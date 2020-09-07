@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json.Linq;
 
-namespace BilibiliApi.Dynamic.DynamicData.Card
+namespace BilibiliApi.Dynamic.Models.Card
 {
     public class TextAndPicCard : Dynamic
     {
@@ -12,12 +12,12 @@ namespace BilibiliApi.Dynamic.DynamicData.Card
         /// <para>动态内容</para>
         /// <para>[字段:JSON.item.description]</para>
         /// </summary>
-        private string Description { set; get; }
+        public string Description { get; }
         /// <summary>
         /// <para>图片链接</para>
         /// <para>[字段:JSON.item.pictures]</para>
         /// </summary>
-        private List<string> ImgList { set; get; }
+        public List<string> ImgList { get; }
         #endregion
 
         #region 构造方法
