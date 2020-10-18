@@ -53,7 +53,7 @@ namespace BilibiliApi.Dynamic.Models
         /// <para>Key:EmojiText[JSON.data.cards[0].display.emoji_info.emoji_details[n].text]</para>
         /// <para>Value:EmojiUrl[JSON.data.cards[0].display.emoji_info.emoji_details[n].url]</para>
         /// </summary>
-        protected Dictionary<string,string> EmojiData { set; get; }
+        public Dictionary<string,string> EmojiData { protected set; get; }
         /// <summary>
         /// <para>动态类型</para>
         /// <para>[字段:JSON.data.cards[0].desc.type]</para>
@@ -75,11 +75,6 @@ namespace BilibiliApi.Dynamic.Models
         /// <para>此字段由框架自动添加</para>
         /// </summary>
         public string NextPageOffset{ set; get; }
-        /// <summary>
-        /// <para>文本消息类型</para>
-        /// <para>默认为Url格式</para>
-        /// </summary>
-        public ContentType ContentType { set; get; }
         #endregion
 
         #region 公有方法
@@ -104,70 +99,6 @@ namespace BilibiliApi.Dynamic.Models
         #endregion
 
         #region 类方法
-        /// <summary>
-        /// 将文本中的emoji码替换为CQ码[Mirai扩展]
-        /// </summary>
-        /// <param name="text">消息文本</param>
-        /// <returns>转换后文本</returns>
-        protected string EmojiToCQCode(string text)
-        {
-            string ret = text;
-            if (this.EmojiData.Count == 0) return ret;
-            foreach (KeyValuePair<string, string> keyValuePair in this.EmojiData)
-            {
-                StringBuilder cqCodeBuilder = new StringBuilder();
-                cqCodeBuilder.Append("[CQ:image,url=");
-                cqCodeBuilder.Append(keyValuePair.Value);
-                cqCodeBuilder.Append("]");
-                ret = ret.Replace(keyValuePair.Key, cqCodeBuilder.ToString());
-            }
-            return ret;
-        }
-        /// <summary>
-        /// 将文本中的emoji码替换为CQ码[Mirai扩展]
-        /// </summary>
-        /// <param name="text">消息文本</param>
-        /// <returns>转换后文本</returns>
-        protected string EmojiToUrl(string text)
-        {
-            string ret = text;
-            if (this.EmojiData.Count == 0) return ret;
-            foreach (KeyValuePair<string, string> keyValuePair in this.EmojiData)
-            {
-                StringBuilder cqCodeBuilder = new StringBuilder();
-                cqCodeBuilder.Append("[");
-                cqCodeBuilder.Append(keyValuePair.Value);
-                cqCodeBuilder.Append("]");
-                ret = ret.Replace(keyValuePair.Key, cqCodeBuilder.ToString());
-            }
-            return ret;
-        }
-        /// <summary>
-        /// 将网络图片链接转换为CQ码[Mirai扩展]
-        /// </summary>
-        /// <param name="url">图片链接</param>
-        /// <returns>CQ码</returns>
-        protected string ImgUrlToCQCode(string url)
-        {
-            StringBuilder cqCodeBuilder = new StringBuilder();
-            cqCodeBuilder.Append("[CQ:image,url=");
-            cqCodeBuilder.Append(url);
-            cqCodeBuilder.Append("]");
-            return cqCodeBuilder.ToString();
-        }
-        /// <summary>
-        /// 将网络图片链接转换为CQ码[Mirai扩展]
-        /// </summary>
-        /// <param name="url">图片链接</param>
-        /// <returns>CQ码</returns>
-        protected string ImgUrlToUrl(string url)
-        {
-            StringBuilder cqCodeBuilder = new StringBuilder();
-            cqCodeBuilder.Append("[");
-            cqCodeBuilder.Append(url);
-            cqCodeBuilder.Append("]");
-            return cqCodeBuilder.ToString();
-        }
         /// <summary>
         /// 初始化父数据
         /// </summary>
@@ -197,7 +128,6 @@ namespace BilibiliApi.Dynamic.Models
             CardType        = (CardType)(int)(root["desc"]?["type"]         ?? 0);
             Card            = JObject.Parse(root["card"]?.ToString()        ?? "{}");
             ExtendJson      = JObject.Parse(root["extend_json"]?.ToString() ?? "{}");
-            ContentType     = ContentType.Url;
             NextPageOffset  = root["next_page"]?.ToString();
         }
         #endregion

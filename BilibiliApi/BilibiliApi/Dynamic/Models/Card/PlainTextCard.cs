@@ -32,18 +32,8 @@ namespace BilibiliApi.Dynamic.Models.Card
         /// 获取动态的文本
         /// </summary>
         /// <returns>将数据转换为格式化文本</returns>
-        public override string ToString()
-        {
-            switch (ContentType)
-            {
-                case ContentType.Url:
-                    return EmojiToUrl(Content);
-                case ContentType.CQCode:
-                    return EmojiToCQCode(Content);
-                default:
-                    return null;
-            }
-        }
+        public override string ToString() =>
+            this.Content;
         #endregion
     }
 }

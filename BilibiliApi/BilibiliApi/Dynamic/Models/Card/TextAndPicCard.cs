@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Newtonsoft.Json.Linq;
 
 namespace BilibiliApi.Dynamic.Models.Card
@@ -39,38 +38,12 @@ namespace BilibiliApi.Dynamic.Models.Card
         #endregion
 
         #region 公有方法
+
         /// <summary>
         /// 获取动态的文本
         /// </summary>
-        /// <returns>将数据转换为格式化文本</returns>
-        public override string ToString()
-        {
-            StringBuilder messageBuilder = new StringBuilder();
-            switch (ContentType)
-            {
-                case ContentType.Url:
-                    messageBuilder.Append(EmojiToUrl(Description));
-                    break;
-                case ContentType.CQCode:
-                    messageBuilder.Append(EmojiToCQCode(Description));
-                    break;
-            }
-            messageBuilder.Append('\n');
-            foreach (string url in ImgList)
-            {
-                switch (ContentType)
-                {
-                    case ContentType.Url:
-                        messageBuilder.Append(ImgUrlToUrl(url));
-                        break;
-                    case ContentType.CQCode:
-                        messageBuilder.Append(ImgUrlToCQCode(url));
-                        break;
-                }
-                messageBuilder.Append('\n');
-            }
-            return messageBuilder.ToString();
-        }
+        /// <returns>将数据转换为文本</returns>
+        public override string ToString() => Description;
         #endregion
     }
 }

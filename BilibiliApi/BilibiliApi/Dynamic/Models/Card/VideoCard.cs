@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
@@ -34,8 +35,6 @@ namespace BilibiliApi.Dynamic.Models.Card
         /// <para>[字段:JSON.dynamic]</para>
         /// </summary>
         public List<string> CardDynamic { get; }
-
-        public bool FullInfo { set; get; }
         #endregion
 
         #region 构造函数
@@ -68,33 +67,10 @@ namespace BilibiliApi.Dynamic.Models.Card
         public override string ToString()
         {
             StringBuilder messageBuilder = new StringBuilder();
-            switch (ContentType)
-            {
-                case ContentType.Url:
-                    messageBuilder.Append(EmojiToUrl(Title));
-                    messageBuilder.Append("\n\n");
-                    if (FullInfo)
-                    {
-                        messageBuilder.Append(EmojiToUrl(Desc));
-                        messageBuilder.Append("\n视频话题：");
-                        messageBuilder.Append(EmojiToUrl(string.Join("|", CardDynamic)));
-                        messageBuilder.Append('\n');
-                    }
-                    messageBuilder.Append(ImgUrlToUrl(CoverUrl));
-                    break;
-                case ContentType.CQCode:
-                    messageBuilder.Append(EmojiToCQCode(Title));
-                    messageBuilder.Append("\n\n");
-                    if (FullInfo)
-                    {
-                        messageBuilder.Append(EmojiToCQCode(Desc));
-                        messageBuilder.Append("\n视频话题：");
-                        messageBuilder.Append(EmojiToCQCode(string.Join("|", CardDynamic)));
-                        messageBuilder.Append('\n');
-                    }
-                    messageBuilder.Append(ImgUrlToCQCode(CoverUrl));
-                    break;
-            }
+            messageBuilder.Append(Title);
+            messageBuilder.Append(Desc);
+            messageBuilder.Append("\n视频话题：");
+            messageBuilder.Append(string.Join("|", CardDynamic));
             messageBuilder.Append("\n\nLink：");
             messageBuilder.Append(GetAvUrl());
             return messageBuilder.ToString();

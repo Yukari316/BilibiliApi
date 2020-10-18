@@ -12,7 +12,7 @@ namespace BilibiliApi.Dynamic.Models.Card
         /// <para>动态内容</para>
         /// <para>[字段:JSON.item.content]</para>
         /// </summary>
-        private string Content { get; }
+        public string Content { get; }
         /// <summary>
         /// <para>源动态链接</para>
         /// <para>[字段:JSON.item.orig_dy_id]</para>
@@ -59,15 +59,7 @@ namespace BilibiliApi.Dynamic.Models.Card
             messageBuilder.Append("转发的动态:\n");
             messageBuilder.Append(GetUserInfo().UserName);
             messageBuilder.Append(":");
-            switch (ContentType)
-            {
-                case ContentType.Url:
-                    messageBuilder.Append(EmojiToUrl(Content));
-                    break;
-                case ContentType.CQCode:
-                    messageBuilder.Append(EmojiToCQCode(Content));
-                    break;
-            }
+            messageBuilder.Append(Content);
             return messageBuilder.ToString();
         }
         /// <summary>
