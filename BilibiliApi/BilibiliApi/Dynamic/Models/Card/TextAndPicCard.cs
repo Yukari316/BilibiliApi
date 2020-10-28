@@ -20,11 +20,10 @@ namespace BilibiliApi.Dynamic.Models.Card
         #endregion
 
         #region 构造方法
-        public TextAndPicCard(JObject root)
+        internal TextAndPicCard(JObject apiResponse, int index) : base(apiResponse, index)
         {
+            if(base.Code != 0) return;
             //写入动态信息
-            //父属性初始化
-            InfoInit(root);
             //描述
             Description = Card["item"]?["description"]?.ToString();
             //图片

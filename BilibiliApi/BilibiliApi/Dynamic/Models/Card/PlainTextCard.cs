@@ -2,6 +2,9 @@ using Newtonsoft.Json.Linq;
 
 namespace BilibiliApi.Dynamic.Models.Card
 {
+    /// <summary>
+    /// 纯文本类型动态
+    /// </summary>
     public class PlainTextCard : Dynamic
     {
         #region 属性
@@ -13,16 +16,10 @@ namespace BilibiliApi.Dynamic.Models.Card
         #endregion
 
         #region 构造函数
-        /// <summary>
-        /// 从json转换为卡片子类
-        /// </summary>
-        /// <param name="root"></param>
-        public PlainTextCard(JObject root)
+        internal PlainTextCard(JObject apiResponse, int index) : base(apiResponse, index)
         {
+            if(base.Code != 0) return;
             //写入动态信息
-            //父属性初始化
-            InfoInit(root);
-            //子属性
             Content = Card["item"]?["content"]?.ToString();
         }
         #endregion

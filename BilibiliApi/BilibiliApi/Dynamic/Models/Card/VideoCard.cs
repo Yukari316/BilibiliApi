@@ -39,11 +39,10 @@ namespace BilibiliApi.Dynamic.Models.Card
 
         #region 构造函数
 
-        public VideoCard(JObject root)
+        internal VideoCard(JObject apiResponse, int index) : base(apiResponse, index)
         {
+            if(base.Code != 0) return;
             //写入动态信息
-            //父属性初始化
-            InfoInit(root);
             //AV号
             AvID = (long) (Card["aid"] ?? 0);
             //标题

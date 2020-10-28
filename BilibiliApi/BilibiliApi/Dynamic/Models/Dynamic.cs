@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using BilibiliApi.BaseModel;
 using BilibiliApi.Dynamic.Enums;
 using Newtonsoft.Json.Linq;
 
@@ -10,7 +10,7 @@ namespace BilibiliApi.Dynamic.Models
     /// <summary>
     /// 动态数据类型
     /// </summary>
-    public class Dynamic
+    public abstract class Dynamic : BaseApiInfo
     {
         #region 属性
         /// <summary>
@@ -92,6 +92,10 @@ namespace BilibiliApi.Dynamic.Models
             };
         }
 
+        /// <summary>
+        /// 获取动态URL
+        /// </summary>
+        /// <returns>URL</returns>
         public string GetDynamicUrl()
         {
             return $"https://t.bilibili.com/{DynamicId}";
@@ -102,12 +106,28 @@ namespace BilibiliApi.Dynamic.Models
         /// <summary>
         /// 初始化父数据
         /// </summary>
-        /// <param name="root"></param>
-        protected void InfoInit(JObject root)
+        protected Dynamic(JObject apiResponse, int index) : base(apiResponse)
         {
+            if(base.Code != 0) return;
+            JObject cardJObject;
+            //处理选择的动态数据
+            if (index == 0)
+            {
+                //去除置顶动态
+                cardJObject = (int)apiResponse["data"]?["cards"]?[0]?["extra"]?["is_space_top"] == 0
+                    ? JObject.Parse(apiResponse["data"]?["cards"]?[0]?.ToString() ?? "{}")
+                    : JObject.Parse(apiResponse["data"]?["cards"]?[1]?.ToString() ?? "{}");
+            }
+            else
+            {
+                cardJObject = JObject.Parse(apiResponse["data"]?["cards"]?[index]?.ToString() ?? "{}");
+            }
+            //避免空json
+            if(cardJObject.Count == 0) return; 
+
             Dictionary<string, string> emojiData = new Dictionary<string, string>();
             //判断是否存在emoji
-            JToken[] emojis = root["display"]?["emoji_info"]?["emoji_details"]?.ToArray();
+            JToken[] emojis = cardJObject["display"]?["emoji_info"]?["emoji_details"]?.ToArray();
             if (emojis        != null &&
                 emojis.Length != 0)
             {
@@ -119,16 +139,37 @@ namespace BilibiliApi.Dynamic.Models
                 }
             }
             //写入数据
-            Uid             = (long)(root["desc"]?["uid"] ?? 0);
-            DynamicId       = root["desc"]?["dynamic_id_str"]?.ToString();
-            UpdateTimeStemp = (long)(root["desc"]?["timestamp"] ?? 0);
-            UserName        = root["desc"]?["user_profile"]?["info"]?["uname"]?.ToString();
-            FaceUrl         = root["desc"]?["user_profile"]?["info"]?["face"]?.ToString();
-            EmojiData       = emojiData;
-            CardType        = (CardType)(int)(root["desc"]?["type"]         ?? 0);
-            Card            = JObject.Parse(root["card"]?.ToString()        ?? "{}");
-            ExtendJson      = JObject.Parse(root["extend_json"]?.ToString() ?? "{}");
-            NextPageOffset  = root["next_page"]?.ToString();
+            this.Uid             = (long)(cardJObject["desc"]?["uid"] ?? 0);
+            this.DynamicId       = cardJObject["desc"]?["dynamic_id_str"]?.ToString();
+            this.UpdateTimeStemp = (long)(cardJObject["desc"]?["timestamp"] ?? 0);
+            this.UserName        = cardJObject["desc"]?["user_profile"]?["info"]?["uname"]?.ToString();
+            this.FaceUrl         = cardJObject["desc"]?["user_profile"]?["info"]?["face"]?.ToString();
+            this.EmojiData       = emojiData;
+            this.CardType        = (CardType)(int)(cardJObject["desc"]?["type"]         ?? 0);
+            this.Card            = JObject.Parse(cardJObject["card"]?.ToString()        ?? "{}");
+            this.ExtendJson      = JObject.Parse(cardJObject["extend_json"]?.ToString() ?? "{}");
+            this.NextPageOffset  = cardJObject["next_offset"]?.ToString();
+        }
+        #endregion
+
+        #region 工具方法
+        /// <summary>
+        /// 获取动态类型
+        /// </summary>
+        internal static CardType GetCardType(JObject sourceData, int index)
+        {
+            int realIndex;
+            if (index == 0)
+            {
+                realIndex = (int) sourceData["data"]?["cards"]?[0]?["extra"]?["is_space_top"] == 0 ? 0 : 1;
+            }
+            else
+            {
+                realIndex = index;
+            }
+            return Enum.IsDefined(typeof(CardType), (int) (sourceData["data"]?["cards"]?[realIndex]?["desc"]?["type"] ?? 0))
+                ? (CardType) (int) sourceData["data"]?["cards"]?[realIndex]?["desc"]?["type"]
+                : CardType.Unknown;
         }
         #endregion
     }
