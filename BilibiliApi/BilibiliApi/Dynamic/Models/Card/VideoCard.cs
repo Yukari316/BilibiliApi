@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
@@ -53,9 +52,8 @@ namespace BilibiliApi.Dynamic.Models.Card
             Desc = Card["desc"]?.ToString();
             //视频话题
             MatchCollection QuotationMarkMatch = Regex.Matches(Card["dynamic"]?.ToString() ?? string.Empty, @"#.*?#");
-            CardDynamic = QuotationMarkMatch
-                          .Cast<Match>().Select(match => match.Value.Substring(1, match.Value.Length - 2))
-                          .ToList();
+            CardDynamic = QuotationMarkMatch.Select(match => match.Value.Substring(1, match.Value.Length - 2))
+                                            .ToList();
         }
         #endregion
 

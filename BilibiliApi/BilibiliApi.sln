@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30406.217
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BilibiliApi", "BilibiliApi\BilibiliApi.csproj", "{3396C92C-DECA-4FB9-B40E-A3631A0B42D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "..\test\test\test.csproj", "{9EF2586F-CC48-42FA-B13B-19F141BB778D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{64712F0A-C3CC-4113-A4FD-1C1455247F46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{3396C92C-DECA-4FB9-B40E-A3631A0B42D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3396C92C-DECA-4FB9-B40E-A3631A0B42D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3396C92C-DECA-4FB9-B40E-A3631A0B42D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9EF2586F-CC48-42FA-B13B-19F141BB778D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9EF2586F-CC48-42FA-B13B-19F141BB778D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9EF2586F-CC48-42FA-B13B-19F141BB778D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9EF2586F-CC48-42FA-B13B-19F141BB778D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64712F0A-C3CC-4113-A4FD-1C1455247F46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64712F0A-C3CC-4113-A4FD-1C1455247F46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64712F0A-C3CC-4113-A4FD-1C1455247F46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64712F0A-C3CC-4113-A4FD-1C1455247F46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

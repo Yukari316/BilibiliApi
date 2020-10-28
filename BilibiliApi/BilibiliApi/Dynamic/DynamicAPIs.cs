@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using BilibiliApi.Dynamic.Enums;
 using BilibiliApi.Dynamic.Models.Card;
 using Newtonsoft.Json;

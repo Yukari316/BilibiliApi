@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>Yukari316</Authors>
     <Description>Bilibili api for .net</Description>
-    <Copyright>CBGan</Copyright>
+    <Copyright>Yukari316</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/CBGan/BilibiliApi</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
@@ -16,8 +16,26 @@
     <Company>Yukari316</Company>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>.\BilibiliApi.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
+	  <DocumentationFile>.\BilibiliApi.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="BilibiliApi.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="BilibiliApi.xml" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="PyLibSharp" Version="1.1.9" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Text;
 using BilibiliApi.Live.Models;
 using Newtonsoft.Json.Linq;
+using PyLibSharp.Requests;
 
 namespace BilibiliApi.Live
 {
@@ -11,7 +14,7 @@ namespace BilibiliApi.Live
         /// 获取直播状态链接
         /// </summary>
         /// <param name="uid">UID</param>
-        internal static string GetLiveStatusUrl(ulong uid)
+        internal static string GetLiveStatusUrl(long uid)
         {
             StringBuilder urlBuilder = new StringBuilder();
             urlBuilder.Append("http://api.live.bilibili.com/bili/living_v2/");
@@ -22,25 +25,33 @@ namespace BilibiliApi.Live
         /// <summary>
         /// 获取直播间信息链接
         /// </summary>
-        /// <param name="uid">UID</param>
-        internal static string GetLiveRoomInfoUrl(ulong uid)
+        /// <param name="roomId">房间id(直播间真实ID)</param>
+        public static LiveInfo GetLiveRoomInfo(long roomId)
         {
-            StringBuilder urlBuilder = new StringBuilder();
-            urlBuilder.Append("http://api.live.bilibili.com/room/v1/Room/getRoomInfoOld?mid=");
-            urlBuilder.Append(uid);
-            return urlBuilder.ToString();
+            ReqResponse response = Requests.Get("https://api.live.bilibili.com/xlive/web-room/v1/index/getRoomPlayInfo",new ReqParams
+            {
+                Params = new Dictionary<string, string>
+                {
+                    {"room_id", roomId.ToString()}
+                }
+            });
+            return response.StatusCode != HttpStatusCode.OK
+                ? new LiveInfo($"net workerror code[{(int) response.StatusCode}]")
+                : new LiveInfo(response.Json());
         }
 
         /// <summary>
-        /// 获取直播间的最新动态
+        /// 获取直播间的最新状态
         /// </summary>
         /// <param name="uid">UID</param>
-        public static LiveStatus GetLiveStatus(ulong uid)
+        public static LiveStatus GetLiveStatus(long uid)
         {
             try
             {
-                JObject dataJObject = JObject.Parse(Util.GetHttpResponse(GetLiveStatusUrl(uid)));
-                return new LiveStatus(dataJObject);
+                ReqResponse response = Requests.Get(GetLiveStatusUrl(uid));
+                return response.StatusCode != HttpStatusCode.OK
+                    ? new LiveStatus($"Net error code[{(int) response.StatusCode}]")
+                    : new LiveStatus(response.Json());
             }
             catch (Exception e)
             {
