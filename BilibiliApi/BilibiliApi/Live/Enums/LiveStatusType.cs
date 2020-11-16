@@ -1,5 +1,8 @@
 namespace BilibiliApi.Live.Enums
 {
+    /// <summary>
+    /// 直播间状态
+    /// </summary>
     public enum LiveStatusType
     {
         /// <summary>

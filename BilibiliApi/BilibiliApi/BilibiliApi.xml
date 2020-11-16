@@ -34,6 +34,11 @@
             初始化
             </summary>
         </member>
+        <member name="T:BilibiliApi.Dynamic.DynamicAPIs">
+            <summary>
+            动态类的API
+            </summary>
+        </member>
         <member name="M:BilibiliApi.Dynamic.DynamicAPIs.GetLatestDynamic(System.Int64,System.Int32,System.String)">
             <summary>
             从服务器获取最新的动态数据
@@ -44,6 +49,11 @@
             <returns>
             
             </returns>
+        </member>
+        <member name="T:BilibiliApi.Dynamic.Enums.CardType">
+            <summary>
+            动态卡片类型
+            </summary>
         </member>
         <member name="F:BilibiliApi.Dynamic.Enums.CardType.Error">
             <summary>
@@ -73,6 +83,11 @@
         <member name="F:BilibiliApi.Dynamic.Enums.CardType.Video">
             <summary>
             视频动态
+            </summary>
+        </member>
+        <member name="T:BilibiliApi.Dynamic.Models.Card.ForwardCard">
+            <summary>
+            转发动态
             </summary>
         </member>
         <member name="P:BilibiliApi.Dynamic.Models.Card.ForwardCard.Content">
@@ -133,6 +148,11 @@
             </summary>
             <returns>将数据转换为格式化文本</returns>
         </member>
+        <member name="T:BilibiliApi.Dynamic.Models.Card.TextAndPicCard">
+            <summary>
+            图片动态
+            </summary>
+        </member>
         <member name="P:BilibiliApi.Dynamic.Models.Card.TextAndPicCard.Description">
             <summary>
             <para>动态内容</para>
@@ -150,6 +170,11 @@
             获取动态的文本
             </summary>
             <returns>将数据转换为文本</returns>
+        </member>
+        <member name="T:BilibiliApi.Dynamic.Models.Card.VideoCard">
+            <summary>
+            视频动态
+            </summary>
         </member>
         <member name="P:BilibiliApi.Dynamic.Models.Card.VideoCard.AvID">
             <summary>
@@ -288,6 +313,11 @@
             获取动态类型
             </summary>
         </member>
+        <member name="T:BilibiliApi.Dynamic.Models.UserInfo">
+            <summary>
+            用户信息
+            </summary>
+        </member>
         <member name="P:BilibiliApi.Dynamic.Models.UserInfo.Uid">
             <summary>
             <para>发送者ID</para>
@@ -304,6 +334,11 @@
             <summary>
             <para>用户头像的图片链接</para>
             <para>[字段:JSON.data.cards[n].desc.user_profile.info.face]</para>
+            </summary>
+        </member>
+        <member name="T:BilibiliApi.Live.Enums.LiveStatusType">
+            <summary>
+            直播间状态
             </summary>
         </member>
         <member name="F:BilibiliApi.Live.Enums.LiveStatusType.Error">
@@ -329,6 +364,11 @@
         <member name="F:BilibiliApi.Live.Enums.LiveStatusType.Carousel">
             <summary>
             轮播
+            </summary>
+        </member>
+        <member name="T:BilibiliApi.Live.LiveAPIs">
+            <summary>
+            直播间相关API
             </summary>
         </member>
         <member name="M:BilibiliApi.Live.LiveAPIs.GetLiveStatusUrl(System.Int64)">

@@ -1,5 +1,8 @@
 namespace BilibiliApi.Dynamic.Models
 {
+    /// <summary>
+    /// 用户信息
+    /// </summary>
     public class UserInfo
     {
         #region 属性

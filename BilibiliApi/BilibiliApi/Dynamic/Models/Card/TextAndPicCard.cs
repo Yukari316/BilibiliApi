@@ -4,6 +4,9 @@ using Newtonsoft.Json.Linq;
 
 namespace BilibiliApi.Dynamic.Models.Card
 {
+    /// <summary>
+    /// 图片动态
+    /// </summary>
     public class TextAndPicCard : Dynamic
     {
         #region 属性

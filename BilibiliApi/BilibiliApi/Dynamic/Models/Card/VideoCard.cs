@@ -6,6 +6,9 @@ using Newtonsoft.Json.Linq;
 
 namespace BilibiliApi.Dynamic.Models.Card
 {
+    /// <summary>
+    /// 视频动态
+    /// </summary>
     public class VideoCard : Dynamic
     {
         #region 属性

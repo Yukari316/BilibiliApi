@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 using BilibiliApi.Live.Models;
-using Newtonsoft.Json.Linq;
 using PyLibSharp.Requests;
 
 namespace BilibiliApi.Live
 {
+    /// <summary>
+    /// 直播间相关API
+    /// </summary>
     public class LiveAPIs
     {
         /// <summary>

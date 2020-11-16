@@ -5,6 +5,9 @@ using Newtonsoft.Json.Linq;
 
 namespace BilibiliApi.Dynamic.Models.Card
 {
+    /// <summary>
+    /// 转发动态
+    /// </summary>
     public class ForwardCard : Dynamic
     {
         #region 属性

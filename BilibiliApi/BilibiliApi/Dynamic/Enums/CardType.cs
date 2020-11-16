@@ -1,5 +1,8 @@
 namespace BilibiliApi.Dynamic.Enums
 {
+    /// <summary>
+    /// 动态卡片类型
+    /// </summary>
     public enum CardType
     {
         /// <summary>

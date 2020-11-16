@@ -8,6 +8,9 @@ using PyLibSharp.Requests;
 
 namespace BilibiliApi.Dynamic
 {
+    /// <summary>
+    /// 动态类的API
+    /// </summary>
     public static class DynamicAPIs
     {
         /// <summary>
