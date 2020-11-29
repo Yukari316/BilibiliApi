@@ -6,6 +6,7 @@ using BilibiliApi.Dynamic.Models;
 using BilibiliApi.Dynamic.Models.Card;
 using BilibiliApi.Live;
 using BilibiliApi.Live.Models;
+using BilibiliApi.User;
 
 namespace test
 {
@@ -13,6 +14,14 @@ namespace test
     {
         static void Main(string[] args)
         {
+            #region UserAPI
+            var userInfo = UserApis.GetLiveRoomInfo(592761);
+            Console.WriteLine($"API Return Code = {userInfo.Code}");
+            Console.WriteLine($"User Name = {userInfo.Name}");
+            Console.WriteLine($"User Level = {userInfo.Level}");
+            Console.WriteLine($"User FaceUrl = {userInfo.FaceUrl}");
+            #endregion
+
             #region LiveAPI
             // LiveStatus liveStatus = LiveAPIs.GetLiveStatus(48039);
             // Console.WriteLine($"live status:{liveStatus.Status}");

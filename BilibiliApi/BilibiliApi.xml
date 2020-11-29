@@ -483,5 +483,117 @@
             初始化
             </summary>
         </member>
+        <member name="T:BilibiliApi.User.Models.LiveRoomInfo">
+            <summary>
+            直播间信息
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.User.Models.LiveRoomInfo.HaveLiveRoom">
+            <summary>
+            是否有直播间
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.User.Models.LiveRoomInfo.Online">
+            <summary>
+            直播间在线状态
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.User.Models.LiveRoomInfo.RoundStatus">
+            <summary>
+            轮播状态
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.User.Models.LiveRoomInfo.LiveUrl">
+            <summary>
+            直播间链接
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.User.Models.LiveRoomInfo.Title">
+            <summary>
+            直播间标题
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.User.Models.LiveRoomInfo.CoverUrl">
+            <summary>
+            封面链接
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.User.Models.LiveRoomInfo.OnlineUser">
+            <summary>
+            人气
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.User.Models.LiveRoomInfo.ShortId">
+            <summary>
+            短ID
+            </summary>
+        </member>
+        <member name="M:BilibiliApi.User.Models.LiveRoomInfo.#ctor(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="T:BilibiliApi.User.Models.UserSpaceInfo">
+            <summary>
+            用户详细信息(空间)
+            (不完整信息解析)
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.User.Models.UserSpaceInfo.Name">
+            <summary>
+            昵称
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.User.Models.UserSpaceInfo.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.User.Models.UserSpaceInfo.FaceUrl">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.User.Models.UserSpaceInfo.Sign">
+            <summary>
+            签名
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.User.Models.UserSpaceInfo.Level">
+            <summary>
+            等级
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.User.Models.UserSpaceInfo.Silence">
+            <summary>
+            封禁状态
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.User.Models.UserSpaceInfo.LiveRoomInfo">
+            <summary>
+            账户直播间信息
+            </summary>
+        </member>
+        <member name="M:BilibiliApi.User.Models.UserSpaceInfo.#ctor(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:BilibiliApi.User.Models.UserSpaceInfo.#ctor(System.String)">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="T:BilibiliApi.User.UserApis">
+            <summary>
+            用户类API
+            </summary>
+        </member>
+        <member name="M:BilibiliApi.User.UserApis.GetLiveRoomInfo(System.Int64)">
+            <summary>
+            获取直播间信息链接
+            </summary>
+            <param name="userId">用户ID</param>
+        </member>
     </members>
 </doc>
