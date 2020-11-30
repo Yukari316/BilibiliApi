@@ -41,7 +41,7 @@ namespace BilibiliApi.Dynamic.Models.Card
 
         #region 构造函数
 
-        internal VideoCard(JObject apiResponse, int index) : base(apiResponse, index)
+        internal VideoCard(JToken apiResponse, int index) : base(apiResponse, index)
         {
             if(base.Code != 0) return;
             //写入动态信息

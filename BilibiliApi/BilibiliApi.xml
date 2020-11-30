@@ -24,7 +24,7 @@
             TTL
             </summary>
         </member>
-        <member name="M:BilibiliApi.BaseModel.BaseApiInfo.#ctor(Newtonsoft.Json.Linq.JObject)">
+        <member name="M:BilibiliApi.BaseModel.BaseApiInfo.#ctor(Newtonsoft.Json.Linq.JToken)">
             <summary>
             初始化
             </summary>
@@ -303,7 +303,7 @@
             </summary>
             <returns>URL</returns>
         </member>
-        <member name="M:BilibiliApi.Dynamic.Models.Dynamic.#ctor(Newtonsoft.Json.Linq.JObject,System.Int32)">
+        <member name="M:BilibiliApi.Dynamic.Models.Dynamic.#ctor(Newtonsoft.Json.Linq.JToken,System.Int32)">
             <summary>
             初始化父数据
             </summary>

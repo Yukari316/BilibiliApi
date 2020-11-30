@@ -30,7 +30,7 @@ namespace BilibiliApi.BaseModel
         /// <summary>
         /// 初始化
         /// </summary>
-        internal BaseApiInfo(JObject apiResponse)
+        internal BaseApiInfo(JToken apiResponse)
         {
             if (apiResponse == null)
             {

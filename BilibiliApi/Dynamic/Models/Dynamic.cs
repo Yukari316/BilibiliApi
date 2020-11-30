@@ -106,7 +106,7 @@ namespace BilibiliApi.Dynamic.Models
         /// <summary>
         /// 初始化父数据
         /// </summary>
-        protected Dynamic(JObject apiResponse, int index) : base(apiResponse)
+        protected Dynamic(JToken apiResponse, int index) : base(apiResponse)
         {
             if(base.Code != 0) return;
             JObject cardJObject;

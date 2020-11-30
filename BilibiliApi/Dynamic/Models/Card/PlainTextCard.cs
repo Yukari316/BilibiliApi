@@ -16,7 +16,7 @@ namespace BilibiliApi.Dynamic.Models.Card
         #endregion
 
         #region 构造函数
-        internal PlainTextCard(JObject apiResponse, int index) : base(apiResponse, index)
+        internal PlainTextCard(JToken apiResponse, int index) : base(apiResponse, index)
         {
             if(base.Code != 0) return;
             //写入动态信息

@@ -41,7 +41,9 @@ namespace BilibiliApi.Dynamic
                     });
                 if (response.StatusCode != HttpStatusCode.OK) return (null, CardType.Error);
 
-                JObject responseData = response.Json();
+                JToken responseData = JToken.Parse(response.Text);
+
+                JObject wow = JObject.FromObject(responseData);
 
                 CardType cardType = Models.Dynamic.GetCardType(response.Json(), index);
 

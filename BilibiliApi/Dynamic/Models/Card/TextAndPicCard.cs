@@ -23,7 +23,7 @@ namespace BilibiliApi.Dynamic.Models.Card
         #endregion
 
         #region 构造方法
-        internal TextAndPicCard(JObject apiResponse, int index) : base(apiResponse, index)
+        internal TextAndPicCard(JToken apiResponse, int index) : base(apiResponse, index)
         {
             if(base.Code != 0) return;
             //写入动态信息
