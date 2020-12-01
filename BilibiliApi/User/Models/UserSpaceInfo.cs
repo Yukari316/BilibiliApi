@@ -51,7 +51,7 @@ namespace BilibiliApi.User.Models
         /// <summary>
         /// 初始化
         /// </summary>
-        internal UserSpaceInfo(JObject apiResponse) : base(apiResponse)
+        internal UserSpaceInfo(JToken apiResponse) : base(apiResponse)
         {
             Name         = apiResponse["data"]?["name"]?.ToString() ?? string.Empty;
             Sex          = apiResponse["data"]?["sex"]?.ToString()  ?? string.Empty;

@@ -66,7 +66,7 @@ namespace BilibiliApi.Live.Models
         /// <summary>
         /// 初始化
         /// </summary>
-        internal LiveInfo(JObject apiResponse) : base(apiResponse)
+        internal LiveInfo(JToken apiResponse) : base(apiResponse)
         {
             if(apiResponse == null) throw new NullReferenceException("response data is null");
 

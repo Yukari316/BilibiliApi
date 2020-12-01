@@ -308,7 +308,7 @@
             初始化父数据
             </summary>
         </member>
-        <member name="M:BilibiliApi.Dynamic.Models.Dynamic.GetCardType(Newtonsoft.Json.Linq.JObject,System.Int32)">
+        <member name="M:BilibiliApi.Dynamic.Models.Dynamic.GetCardType(Newtonsoft.Json.Linq.JToken,System.Int32)">
             <summary>
             获取动态类型
             </summary>
@@ -441,7 +441,7 @@
             直播开始时间
             </summary>
         </member>
-        <member name="M:BilibiliApi.Live.Models.LiveInfo.#ctor(Newtonsoft.Json.Linq.JObject)">
+        <member name="M:BilibiliApi.Live.Models.LiveInfo.#ctor(Newtonsoft.Json.Linq.JToken)">
             <summary>
             初始化
             </summary>
@@ -473,7 +473,7 @@
             字段[JSON.data.url]
             </summary>
         </member>
-        <member name="M:BilibiliApi.Live.Models.LiveStatus.#ctor(Newtonsoft.Json.Linq.JObject)">
+        <member name="M:BilibiliApi.Live.Models.LiveStatus.#ctor(Newtonsoft.Json.Linq.JToken)">
             <summary>
             初始化
             </summary>
@@ -574,7 +574,7 @@
             账户直播间信息
             </summary>
         </member>
-        <member name="M:BilibiliApi.User.Models.UserSpaceInfo.#ctor(Newtonsoft.Json.Linq.JObject)">
+        <member name="M:BilibiliApi.User.Models.UserSpaceInfo.#ctor(Newtonsoft.Json.Linq.JToken)">
             <summary>
             初始化
             </summary>

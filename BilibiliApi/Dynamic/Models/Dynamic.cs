@@ -156,7 +156,7 @@ namespace BilibiliApi.Dynamic.Models
         /// <summary>
         /// 获取动态类型
         /// </summary>
-        internal static CardType GetCardType(JObject sourceData, int index)
+        internal static CardType GetCardType(JToken sourceData, int index)
         {
             int realIndex;
             if (index == 0)

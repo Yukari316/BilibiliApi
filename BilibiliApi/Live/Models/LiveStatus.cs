@@ -35,7 +35,7 @@ namespace BilibiliApi.Live.Models
         /// <summary>
         /// 初始化
         /// </summary>
-        internal LiveStatus(JObject apiResponse) : base(apiResponse)
+        internal LiveStatus(JToken apiResponse) : base(apiResponse)
         {
             if (apiResponse == null)
             {
