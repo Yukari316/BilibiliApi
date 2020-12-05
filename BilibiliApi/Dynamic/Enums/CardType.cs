@@ -1,14 +1,17 @@
+using System.ComponentModel;
+
 namespace BilibiliApi.Dynamic.Enums
 {
     /// <summary>
     /// 动态卡片类型
     /// </summary>
+    [DefaultValue(Unknown)]
     public enum CardType
     {
         /// <summary>
         /// 错误
         /// </summary>
-        Error = 0,
+        Error = -1,
         /// <summary>
         /// 未知类型
         /// </summary>

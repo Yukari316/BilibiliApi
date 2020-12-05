@@ -27,16 +27,16 @@ namespace test
             // Console.WriteLine($"live status:{liveStatus.Status}");
             // Console.WriteLine($"live room id:{liveStatus.UrlId}");
             // Console.ReadLine();
-            LiveInfo liveInfo = LiveAPIs.GetLiveRoomInfo(21448649);
-            Console.WriteLine($"API Return Code = {liveInfo.Code}");
-            Console.WriteLine($"Liver uid = {liveInfo.UserId}");
-            Console.WriteLine($"Live room status = {liveInfo.LiveStatus}");
-            Console.ReadLine();
+            // LiveInfo liveInfo = LiveAPIs.GetLiveRoomInfo(21448649);
+            // Console.WriteLine($"API Return Code = {liveInfo.Code}");
+            // Console.WriteLine($"Liver uid = {liveInfo.UserId}");
+            // Console.WriteLine($"Live room status = {liveInfo.LiveStatus}");
+            // Console.ReadLine();
             #endregion
 
             #region 动态API
             //获取指定用户的最新动态
-            var cardData = DynamicAPIs.GetLatestDynamic(48039);
+            var cardData = DynamicAPIs.GetLatestDynamic(353840826);
             switch (cardData.cardType)
             {
                 case CardType.PlainText:
