@@ -2,7 +2,6 @@ using System;
 using System.Net;
 using BilibiliApi.Dynamic.Enums;
 using BilibiliApi.Dynamic.Models.Card;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PyLibSharp.Requests;
 
@@ -30,15 +29,24 @@ namespace BilibiliApi.Dynamic
             //响应JSON
             try
             {
-                ReqResponse response =
-                    Requests.Get("https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/space_history", new ReqParams
-                    {
-                        Params =
+                ReqResponse response;
+                try
+                {
+                    response =
+                        Requests.Get("https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/space_history", new ReqParams
                         {
-                            {"host_uid", uid.ToString()},
-                            {"offset_dynamic_id", pageOffset}
-                        }
-                    });
+                            Params =
+                            {
+                                {"host_uid", uid.ToString()},
+                                {"offset_dynamic_id", pageOffset}
+                            }
+                        });
+                }
+                catch (Exception e)
+                {
+                    return (e, CardType.Error);
+                }
+
                 if (response.StatusCode != HttpStatusCode.OK) return (null, CardType.Error);
 
                 JToken   responseData = response.Json();
@@ -56,7 +64,7 @@ namespace BilibiliApi.Dynamic
             //出现错误时将重构json信息
             catch (Exception e)
             {
-                throw new JsonException("json parse error", e);
+                return (e, CardType.Error);
             }
         }
     }

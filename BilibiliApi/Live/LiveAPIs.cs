@@ -30,15 +30,23 @@ namespace BilibiliApi.Live
         /// <param name="roomId">房间id(直播间真实ID)</param>
         public static LiveInfo GetLiveRoomInfo(long roomId)
         {
-            ReqResponse response = Requests.Get("https://api.live.bilibili.com/xlive/web-room/v1/index/getRoomPlayInfo",new ReqParams
+            ReqResponse response;
+            try
             {
-                Params = new Dictionary<string, string>
+                response = Requests.Get("https://api.live.bilibili.com/xlive/web-room/v1/index/getRoomPlayInfo",new ReqParams
                 {
-                    {"room_id", roomId.ToString()}
-                }
-            });
+                    Params = new Dictionary<string, string>
+                    {
+                        {"room_id", roomId.ToString()}
+                    }
+                });
+            }
+            catch (Exception e)
+            {
+                return new LiveInfo($"net error message:{e}");
+            }
             return response.StatusCode != HttpStatusCode.OK
-                ? new LiveInfo($"net workerror code[{(int) response.StatusCode}]")
+                ? new LiveInfo($"net error code[{(int) response.StatusCode}]")
                 : new LiveInfo(response.Json());
         }
 
@@ -50,7 +58,15 @@ namespace BilibiliApi.Live
         {
             try
             {
-                ReqResponse response = Requests.Get(GetLiveStatusUrl(uid));
+                ReqResponse response;
+                try
+                {
+                    response = Requests.Get(GetLiveStatusUrl(uid));
+                }
+                catch (Exception e)
+                {
+                    return new LiveStatus($"Net error message:{e}");
+                }
                 return response.StatusCode != HttpStatusCode.OK
                     ? new LiveStatus($"Net error code[{(int) response.StatusCode}]")
                     : new LiveStatus(response.Json());

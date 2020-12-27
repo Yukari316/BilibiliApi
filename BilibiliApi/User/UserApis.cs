@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Net;
 using BilibiliApi.User.Models;
@@ -16,15 +17,25 @@ namespace BilibiliApi.User
         /// <param name="userId">用户ID</param>
         public static UserSpaceInfo GetLiveRoomInfo(long userId)
         {
-            ReqResponse response = Requests.Get("https://api.bilibili.com/x/space/acc/info",new ReqParams
+            ReqResponse response;
+
+            try
             {
-                Params = new Dictionary<string, string>
+                response = Requests.Get("https://api.bilibili.com/x/space/acc/info",new ReqParams
                 {
-                    {"mid", userId.ToString()}
-                }
-            });
+                    Params = new Dictionary<string, string>
+                    {
+                        {"mid", userId.ToString()}
+                    }
+                });
+            }
+            catch (Exception e)
+            {
+                return new UserSpaceInfo($"net error message:{e}");
+            }
+            
             return response.StatusCode != HttpStatusCode.OK
-                ? new UserSpaceInfo($"net workerror code[{(int) response.StatusCode}]")
+                ? new UserSpaceInfo($"net error code[{(int) response.StatusCode}]")
                 : new UserSpaceInfo(response.Json());
         }
     }

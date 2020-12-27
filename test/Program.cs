@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using BilibiliApi.Dynamic;
 using BilibiliApi.Dynamic.Enums;
 using BilibiliApi.Dynamic.Models;
@@ -7,6 +8,7 @@ using BilibiliApi.Dynamic.Models.Card;
 using BilibiliApi.Live;
 using BilibiliApi.Live.Models;
 using BilibiliApi.User;
+using Newtonsoft.Json.Linq;
 
 namespace test
 {
@@ -36,11 +38,11 @@ namespace test
 
             #region 动态API
             //获取指定用户的最新动态
-            var cardData = DynamicAPIs.GetLatestDynamic(353840826);
+            var cardData = DynamicAPIs.GetLatestDynamic(8453668);
             switch (cardData.cardType)
             {
                 case CardType.PlainText:
-                    if (!(cardData.cardObj is PlainTextCard plainTextCard)) return;
+                    if (!(cardData is { cardObj: PlainTextCard plainTextCard })) return;
                     //将动态转为文本
                     Console.WriteLine(plainTextCard.ToString());
                     //动态链接
@@ -62,7 +64,7 @@ namespace test
                     }
                     break;
                 case CardType.TextAndPic:
-                    if (!(cardData.cardObj is TextAndPicCard textAndPicCard)) return;
+                    if (!(cardData is { cardObj: TextAndPicCard textAndPicCard })) return;
                     Console.WriteLine(textAndPicCard.ToString());
                     //动态链接
                     Console.WriteLine($"DynamicUrl:{textAndPicCard.GetDynamicUrl()}");
@@ -83,7 +85,7 @@ namespace test
                     }
                     break;
                 case CardType.Forward:
-                    if (!(cardData.cardObj is ForwardCard forwardCard)) return;
+                    if (!(cardData is { cardObj: ForwardCard forwardCard })) return;
                     Console.WriteLine(forwardCard.ToString());
                     Console.WriteLine($"\nOrginUrl:{forwardCard.GetOrginUrl(out CardType orginType)}");
                     Console.WriteLine($"OrginType:{orginType}");
@@ -107,7 +109,7 @@ namespace test
                     }
                     break;
                 case CardType.Video:
-                    if (!(cardData.cardObj is VideoCard videoCard)) return;
+                    if (!(cardData is { cardObj: VideoCard videoCard })) return;
                     Console.WriteLine(videoCard.ToString());
                     //封面
                     Console.WriteLine($"Cover Link:{videoCard.CoverUrl}");
