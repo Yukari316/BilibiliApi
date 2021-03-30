@@ -21,7 +21,7 @@ namespace BilibiliApi.User
 
             try
             {
-                response = Requests.Get("https://api.bilibili.com/x/space/acc/info",new ReqParams
+                response = Requests.Get("https://api.bilibili.com/x/space/acc/info", new ReqParams
                 {
                     Params = new Dictionary<string, string>
                     {
@@ -33,7 +33,7 @@ namespace BilibiliApi.User
             {
                 return new UserSpaceInfo($"net error message:{e}");
             }
-            
+
             return response.StatusCode != HttpStatusCode.OK
                 ? new UserSpaceInfo($"net error code[{(int) response.StatusCode}]")
                 : new UserSpaceInfo(response.Json());

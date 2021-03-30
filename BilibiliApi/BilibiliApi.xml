@@ -595,5 +595,77 @@
             </summary>
             <param name="userId">用户ID</param>
         </member>
+        <member name="T:BilibiliApi.Video.Models.VideoInfo">
+            <summary>
+            视频信息
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.Video.Models.VideoInfo.Aid">
+            <summary>
+            av号
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.Video.Models.VideoInfo.Bid">
+            <summary>
+            bv号
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.Video.Models.VideoInfo.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.Video.Models.VideoInfo.Desc">
+            <summary>
+            简介
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.Video.Models.VideoInfo.AuthName">
+            <summary>
+            作者名
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.Video.Models.VideoInfo.AuthUid">
+            <summary>
+            作者UID
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.Video.Models.VideoInfo.PublishTime">
+            <summary>
+            发布时间
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.Video.Models.VideoInfo.LikeCount">
+            <summary>
+            点赞数
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.Video.Models.VideoInfo.CoinCount">
+            <summary>
+            投币数
+            </summary>
+        </member>
+        <member name="M:BilibiliApi.Video.Models.VideoInfo.#ctor(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:BilibiliApi.Video.Models.VideoInfo.#ctor(System.String)">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="T:BilibiliApi.Video.VideoApis">
+            <summary>
+            视频相关API
+            </summary>
+        </member>
+        <member name="M:BilibiliApi.Video.VideoApis.GetVideoInfo(System.String)">
+            <summary>
+            <para>获取视频信息</para>
+            <para>自动识别AV号和BV号</para>
+            </summary>
+            <param name="videoId">AV号/BV号</param>
+        </member>
     </members>
 </doc>

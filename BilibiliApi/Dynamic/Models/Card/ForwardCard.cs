@@ -11,32 +11,38 @@ namespace BilibiliApi.Dynamic.Models.Card
     public class ForwardCard : Dynamic
     {
         #region 属性
+
         /// <summary>
         /// <para>动态内容</para>
         /// <para>[字段:JSON.item.content]</para>
         /// </summary>
         public string Content { get; }
+
         /// <summary>
         /// <para>源动态链接</para>
         /// <para>[字段:JSON.item.orig_dy_id]</para>
         /// </summary>
         private string OrginDynamicId { get; }
+
         /// <summary>
         /// <para>源动态类型</para>
         /// <para>[字段:JSON.item.orig_type]</para>
         /// </summary>
         private CardType OrginType { get; }
+
         /// <summary>
         /// <para>源动态JSON</para>
         /// <para>[字段:JSON.origin]</para>
         /// </summary>
         private JObject OrginJson { get; }
+
         #endregion
 
         #region 构造方法
+
         internal ForwardCard(JToken apiResponse, int index) : base(apiResponse, index)
         {
-            if(base.Code != 0) return;
+            if (base.Code != 0) return;
             //写入动态信息
             //描述
             Content = Card["item"]?["content"]?.ToString();
@@ -49,9 +55,11 @@ namespace BilibiliApi.Dynamic.Models.Card
             //源动态数据
             OrginJson = JObject.Parse(Card["origin"]?.ToString() ?? "{}");
         }
+
         #endregion
 
         #region 公有方法
+
         /// <summary>
         /// 将动态转换为格式化文本
         /// </summary>
@@ -64,6 +72,7 @@ namespace BilibiliApi.Dynamic.Models.Card
             messageBuilder.Append(Content);
             return messageBuilder.ToString();
         }
+
         /// <summary>
         /// 获取源动态的链接
         /// </summary>
@@ -85,6 +94,7 @@ namespace BilibiliApi.Dynamic.Models.Card
             if (Content == null || OrginDynamicId == null || CardType == CardType.Unknown) return null;
             return OrginJson;
         }
+
         #endregion
     }
 }

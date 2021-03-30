@@ -10,6 +10,7 @@ namespace BilibiliApi.BaseModel
     public abstract class BaseApiInfo
     {
         #region 属性
+
         /// <summary>
         /// API执行返回值
         /// </summary>
@@ -24,9 +25,11 @@ namespace BilibiliApi.BaseModel
         /// TTL
         /// </summary>
         public int TTL { get; }
+
         #endregion
 
         #region 构造函数
+
         /// <summary>
         /// 初始化
         /// </summary>
@@ -36,6 +39,7 @@ namespace BilibiliApi.BaseModel
             {
                 throw new NullReferenceException("response data is null");
             }
+
             //转换JSON数据
             try
             {
@@ -58,6 +62,7 @@ namespace BilibiliApi.BaseModel
             this.Message = message;
             this.TTL     = ttl;
         }
+
         #endregion
     }
 }

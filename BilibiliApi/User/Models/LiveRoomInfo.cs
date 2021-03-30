@@ -19,7 +19,7 @@ namespace BilibiliApi.User.Models
         /// 直播间在线状态
         /// </summary>
         public bool Online { get; private set; }
-        
+
         /// <summary>
         /// 轮播状态
         /// </summary>
@@ -49,9 +49,11 @@ namespace BilibiliApi.User.Models
         /// 短ID
         /// </summary>
         public int ShortId { get; private set; }
+
         #endregion
 
         #region 构造函数
+
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -68,6 +70,7 @@ namespace BilibiliApi.User.Models
             OnlineUser   = Convert.ToInt64(liveroomData["online"] ?? -1);
             ShortId      = Convert.ToInt32(liveroomData["roomid"] ?? -1);
         }
+
         #endregion
     }
 }

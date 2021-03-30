@@ -11,6 +11,7 @@ namespace BilibiliApi.User.Models
     public class UserSpaceInfo : BaseApiInfo
     {
         #region 属性
+
         /// <summary>
         /// 昵称
         /// </summary>
@@ -45,9 +46,11 @@ namespace BilibiliApi.User.Models
         /// 账户直播间信息
         /// </summary>
         public LiveRoomInfo LiveRoomInfo { get; private set; }
+
         #endregion
 
         #region 构造函数
+
         /// <summary>
         /// 初始化
         /// </summary>
@@ -66,7 +69,9 @@ namespace BilibiliApi.User.Models
         /// 初始化
         /// </summary>
         internal UserSpaceInfo(string errorMessage) : base(-1, errorMessage, -1)
-        { }
+        {
+        }
+
         #endregion
     }
 }

@@ -33,18 +33,20 @@ namespace BilibiliApi.Live
             ReqResponse response;
             try
             {
-                response = Requests.Get("https://api.live.bilibili.com/xlive/web-room/v1/index/getRoomPlayInfo",new ReqParams
-                {
-                    Params = new Dictionary<string, string>
-                    {
-                        {"room_id", roomId.ToString()}
-                    }
-                });
+                response = Requests.Get("https://api.live.bilibili.com/xlive/web-room/v1/index/getRoomPlayInfo",
+                                        new ReqParams
+                                        {
+                                            Params = new Dictionary<string, string>
+                                            {
+                                                {"room_id", roomId.ToString()}
+                                            }
+                                        });
             }
             catch (Exception e)
             {
                 return new LiveInfo($"net error message:{e}");
             }
+
             return response.StatusCode != HttpStatusCode.OK
                 ? new LiveInfo($"net error code[{(int) response.StatusCode}]")
                 : new LiveInfo(response.Json());
@@ -67,6 +69,7 @@ namespace BilibiliApi.Live
                 {
                     return new LiveStatus($"Net error message:{e}");
                 }
+
                 return response.StatusCode != HttpStatusCode.OK
                     ? new LiveStatus($"Net error code[{(int) response.StatusCode}]")
                     : new LiveStatus(response.Json());

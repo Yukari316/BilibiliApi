@@ -13,6 +13,7 @@ namespace BilibiliApi.Live.Models
     public class LiveStatus : BaseApiInfo
     {
         #region 属性
+
         /// <summary>
         /// 直播状态
         /// 字段[JSON.data.status]
@@ -29,9 +30,11 @@ namespace BilibiliApi.Live.Models
         /// 字段[JSON.data.url]
         /// </summary>
         public string RoomUrl { get; }
+
         #endregion
 
         #region 构造函数
+
         /// <summary>
         /// 初始化
         /// </summary>
@@ -41,6 +44,7 @@ namespace BilibiliApi.Live.Models
             {
                 throw new NullReferenceException("response data is null");
             }
+
             //处理json信息 
             try
             {
@@ -67,6 +71,7 @@ namespace BilibiliApi.Live.Models
         {
             Status = LiveStatusType.Error;
         }
+
         #endregion
     }
 }

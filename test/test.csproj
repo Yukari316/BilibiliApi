@@ -9,4 +9,8 @@
     <ProjectReference Include="..\BilibiliApi\BilibiliApi.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="YukariToolBox" Version="1.1.2" />
+  </ItemGroup>
+
 </Project>

@@ -5,10 +5,9 @@
     <Authors>Yukari316</Authors>
     <Description>Bilibili api for .net</Description>
     <Copyright>Yukari316</Copyright>
-    <PackageLicenseFile></PackageLicenseFile>
     <PackageProjectUrl>https://github.com/CBGan/BilibiliApi</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>0.3.7</Version>
+    <Version>0.3.8</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Company>Yukari316</Company>
@@ -36,8 +35,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="PyLibSharp.Requests" Version="1.2.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="PyLibSharp.Requests" Version="1.2.8.1" />
+    <PackageReference Include="YukariToolBox" Version="1.1.2" />
   </ItemGroup>
 
   <ItemGroup>

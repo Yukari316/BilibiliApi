@@ -12,6 +12,7 @@ namespace BilibiliApi.Live.Models
     public class LiveInfo : BaseApiInfo
     {
         #region 属性
+
         /// <summary>
         /// 直播间真实ID
         /// </summary>
@@ -52,23 +53,27 @@ namespace BilibiliApi.Live.Models
         /// <para>[字段:JSON.data.cards[n].desc.timestamp]</para>
         /// <para>仅用于设置时间，会自动转换为UpdateTime[DateTime]</para>
         /// </summary>
-        private long LiveStartTimeStemp {
+        private long LiveStartTimeStemp
+        {
             set => LiveStartTime = DateTimeOffset
                                    .FromUnixTimeSeconds(value).AddHours(8).DateTime;
         }
+
         /// <summary>
         /// 直播开始时间
         /// </summary>
         public DateTime LiveStartTime { private set; get; }
+
         #endregion
 
         #region 构造函数
+
         /// <summary>
         /// 初始化
         /// </summary>
         internal LiveInfo(JToken apiResponse) : base(apiResponse)
         {
-            if(apiResponse == null) throw new NullReferenceException("response data is null");
+            if (apiResponse == null) throw new NullReferenceException("response data is null");
 
             try
             {
@@ -80,15 +85,17 @@ namespace BilibiliApi.Live.Models
                     return;
                 }
 
-                this.RoomId         = Convert.ToInt64(apiResponse["data"]?["room_id"]        ?? -1);
-                this.ShortId        = Convert.ToInt64(apiResponse["data"]?["short_id"]       ?? -1);
-                this.UserId         = Convert.ToInt64(apiResponse["data"]?["uid"]            ?? -1);
-                this.NeedP2P        = Convert.ToInt32(apiResponse["data"]?["need_p2p"]       ?? -1);
-                this.Encrypted      = Convert.ToBoolean(apiResponse["data"]?["encrypted"]    ?? false);
-                this.PasswdVerified = PasswdVerified && Convert.ToBoolean(apiResponse["data"]?["pwd_verified"] ?? false);
+                this.RoomId    = Convert.ToInt64(apiResponse["data"]?["room_id"]     ?? -1);
+                this.ShortId   = Convert.ToInt64(apiResponse["data"]?["short_id"]    ?? -1);
+                this.UserId    = Convert.ToInt64(apiResponse["data"]?["uid"]         ?? -1);
+                this.NeedP2P   = Convert.ToInt32(apiResponse["data"]?["need_p2p"]    ?? -1);
+                this.Encrypted = Convert.ToBoolean(apiResponse["data"]?["encrypted"] ?? false);
+                this.PasswdVerified =
+                    PasswdVerified && Convert.ToBoolean(apiResponse["data"]?["pwd_verified"] ?? false);
                 this.LiveStartTimeStemp = Convert.ToInt64(apiResponse["data"]?["live_time"]);
-                this.LiveStatus = Enum.IsDefined(typeof(LiveStatusType), 
-                                                 (int) (apiResponse["data"]?["live_status"] ?? (int) LiveStatusType.Error))
+                this.LiveStatus = Enum.IsDefined(typeof(LiveStatusType),
+                                                 (int) (apiResponse["data"]?["live_status"] ??
+                                                        (int) LiveStatusType.Error))
                     ? (LiveStatusType) (int) apiResponse["data"]?["live_status"]
                     : LiveStatusType.Unknown;
             }
@@ -102,7 +109,9 @@ namespace BilibiliApi.Live.Models
         /// 初始化
         /// </summary>
         internal LiveInfo(string errorMessage) : base(-1, errorMessage, -1)
-        { }
+        {
+        }
+
         #endregion
     }
 }

@@ -33,14 +33,15 @@ namespace BilibiliApi.Dynamic
                 try
                 {
                     response =
-                        Requests.Get("https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/space_history", new ReqParams
-                        {
-                            Params =
-                            {
-                                {"host_uid", uid.ToString()},
-                                {"offset_dynamic_id", pageOffset}
-                            }
-                        });
+                        Requests.Get("https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/space_history",
+                                     new ReqParams
+                                     {
+                                         Params =
+                                         {
+                                             {"host_uid", uid.ToString()},
+                                             {"offset_dynamic_id", pageOffset}
+                                         }
+                                     });
                 }
                 catch (Exception e)
                 {

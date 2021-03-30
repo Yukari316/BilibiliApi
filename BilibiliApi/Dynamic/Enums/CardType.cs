@@ -12,22 +12,27 @@ namespace BilibiliApi.Dynamic.Enums
         /// 错误
         /// </summary>
         Error = -1,
+
         /// <summary>
         /// 未知类型
         /// </summary>
         Unknown = 0,
+
         /// <summary>
         /// 转发
         /// </summary>
         Forward = 1,
+
         /// <summary>
         /// 图片动态
         /// </summary>
         TextAndPic = 2,
+
         /// <summary>
         /// 纯文本动态
         /// </summary>
         PlainText = 4,
+
         /// <summary>
         /// 视频动态
         /// </summary>
