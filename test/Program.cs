@@ -137,7 +137,7 @@ namespace test
 
             #region VideoAPI
 
-            var vInfo = VideoApis.GetVideoInfo("BV1LV411e7Ca");
+            var vInfo = VideoApis.GetVideoInfo("av417250412");
             Console.WriteLine(vInfo.Title);
 
             #endregion

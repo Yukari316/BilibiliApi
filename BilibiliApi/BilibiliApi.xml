@@ -620,6 +620,11 @@
             简介
             </summary>
         </member>
+        <member name="P:BilibiliApi.Video.Models.VideoInfo.CoverUrl">
+            <summary>
+            封面
+            </summary>
+        </member>
         <member name="P:BilibiliApi.Video.Models.VideoInfo.AuthName">
             <summary>
             作者名

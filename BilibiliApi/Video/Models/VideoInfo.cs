@@ -31,6 +31,11 @@ namespace BilibiliApi.Video.Models
         /// 简介
         /// </summary>
         public string Desc { get; private set; }
+        
+        /// <summary>
+        /// 封面
+        /// </summary>
+        public string CoverUrl { get; private set; }
 
         /// <summary>
         /// 作者名
@@ -68,6 +73,7 @@ namespace BilibiliApi.Video.Models
             Bid         = apiResponse["data"]?["bvid"]?.ToString()           ?? string.Empty;
             Title       = apiResponse["data"]?["title"]?.ToString()          ?? string.Empty;
             Desc        = apiResponse["data"]?["desc"]?.ToString()           ?? string.Empty;
+            CoverUrl    = apiResponse["data"]?["pic"]?.ToString()            ?? string.Empty;
             AuthName    = apiResponse["data"]?["owner"]?["name"]?.ToString() ?? string.Empty;
             AuthUid     = Convert.ToInt64(apiResponse["data"]?["owner"]?["mid"] ?? -1);
             PublishTime = Convert.ToInt64(apiResponse["data"]?["pubdate"]       ?? -1).ToDateTime();

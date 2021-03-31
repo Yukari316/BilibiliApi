@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using BilibiliApi.Video.Models;
 using PyLibSharp.Requests;
+using YukariToolBox.FormatLog;
 
 namespace BilibiliApi.Video
 {
@@ -32,7 +33,7 @@ namespace BilibiliApi.Video
                 {
                     Params = new Dictionary<string, string>
                     {
-                        {paraName, videoId}
+                        {paraName, paraName == "aid" ? videoId[2..] : videoId}
                     }
                 });
             }

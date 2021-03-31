@@ -7,7 +7,7 @@
     <Copyright>Yukari316</Copyright>
     <PackageProjectUrl>https://github.com/CBGan/BilibiliApi</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>0.3.8</Version>
+    <Version>0.3.9</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Company>Yukari316</Company>
