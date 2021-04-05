@@ -36,7 +36,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="PyLibSharp.Requests" Version="1.2.8.1" />
+    <PackageReference Include="PyLibSharp.Requests" Version="1.2.9" />
     <PackageReference Include="YukariToolBox" Version="1.1.2" />
   </ItemGroup>
 
