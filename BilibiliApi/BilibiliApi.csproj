@@ -7,7 +7,7 @@
     <Copyright>Yukari316</Copyright>
     <PackageProjectUrl>https://github.com/CBGan/BilibiliApi</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>0.3.9</Version>
+    <Version>0.3.10</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Company>Yukari316</Company>
@@ -36,8 +36,8 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="PyLibSharp.Requests" Version="1.2.9" />
-    <PackageReference Include="YukariToolBox" Version="1.1.2" />
+    <PackageReference Include="PyLibSharp.Requests" Version="1.2.10" />
+    <PackageReference Include="YukariToolBox" Version="1.1.3" />
   </ItemGroup>
 
   <ItemGroup>

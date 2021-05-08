@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net;
 using BilibiliApi.Video.Models;
 using PyLibSharp.Requests;
-using YukariToolBox.FormatLog;
 
 namespace BilibiliApi.Video
 {
