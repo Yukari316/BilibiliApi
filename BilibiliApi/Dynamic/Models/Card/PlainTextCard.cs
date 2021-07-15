@@ -25,6 +25,13 @@ namespace BilibiliApi.Dynamic.Models.Card
             //写入动态信息
             Content = Card["item"]?["content"]?.ToString();
         }
+        
+        internal PlainTextCard(JToken apiResponse) : base(apiResponse)
+        {
+            if (base.Code != 0) return;
+            //写入动态信息
+            Content = Card["item"]?["content"]?.ToString();
+        }
 
         #endregion
 

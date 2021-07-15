@@ -37,6 +37,10 @@ namespace BilibiliApi.Dynamic.Enums
         /// 视频动态
         /// </summary>
         Video = 8,
+        /// <summary>
+        /// 专栏
+        /// </summary>
+        Column = 64,
         // /// <summary>
         // /// 直播间动态
         // /// </summary>

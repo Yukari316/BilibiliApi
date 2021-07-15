@@ -22,7 +22,7 @@ namespace BilibiliApi.Dynamic.Models.Card
         /// <para>源动态链接</para>
         /// <para>[字段:JSON.item.orig_dy_id]</para>
         /// </summary>
-        private string OrginDynamicId { get; }
+        private ulong OrginDynamicId { get; }
 
         /// <summary>
         /// <para>源动态类型</para>
@@ -47,7 +47,23 @@ namespace BilibiliApi.Dynamic.Models.Card
             //描述
             Content = Card["item"]?["content"]?.ToString();
             //源动态ID
-            OrginDynamicId = Card["item"]?["orig_dy_id"]?.ToString();
+            OrginDynamicId = Convert.ToUInt64(Card["item"]?["orig_dy_id"] ?? -1);
+            //源动态类型
+            OrginType = Enum.IsDefined(typeof(CardType), (int) (Card["item"]?["orig_type"] ?? 0))
+                ? (CardType) (int) (Card["item"]?["orig_type"] ?? 0)
+                : CardType.Unknown;
+            //源动态数据
+            OrginJson = JObject.Parse(Card["origin"]?.ToString() ?? "{}");
+        }
+        
+        internal ForwardCard(JToken apiResponse) : base(apiResponse)
+        {
+            if (base.Code != 0) return;
+            //写入动态信息
+            //描述
+            Content = Card["item"]?["content"]?.ToString();
+            //源动态ID
+            OrginDynamicId = Convert.ToUInt64(Card["item"]?["orig_dy_id"] ?? -1);
             //源动态类型
             OrginType = Enum.IsDefined(typeof(CardType), (int) (Card["item"]?["orig_type"] ?? 0))
                 ? (CardType) (int) (Card["item"]?["orig_type"] ?? 0)
@@ -80,7 +96,7 @@ namespace BilibiliApi.Dynamic.Models.Card
         public string GetOrginUrl(out CardType orginCardType)
         {
             orginCardType = OrginType;
-            if (Content == null || OrginDynamicId == null || CardType == CardType.Unknown) return null;
+            if (Content == null || OrginDynamicId <= 0 || CardType == CardType.Unknown) return null;
             return $"https://t.bilibili.com/{OrginDynamicId}";
         }
 
@@ -91,8 +107,16 @@ namespace BilibiliApi.Dynamic.Models.Card
         public JObject GetOrginJson(out CardType orginCardType)
         {
             orginCardType = OrginType;
-            if (Content == null || OrginDynamicId == null || CardType == CardType.Unknown) return null;
+            if (Content == null || OrginDynamicId <= 0 || CardType == CardType.Unknown) return null;
             return OrginJson;
+        }
+
+        /// <summary>
+        /// 获取转发源内容
+        /// </summary>
+        public (object cardObj, CardType cardType) GetOriginCard()
+        {
+            return DynamicAPIs.GetDynamic(OrginDynamicId);
         }
 
         #endregion
