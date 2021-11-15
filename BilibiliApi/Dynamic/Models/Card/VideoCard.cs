@@ -64,6 +64,24 @@ namespace BilibiliApi.Dynamic.Models.Card
             CardDynamic = QuotationMarkMatch.Select(match => match.Value.Substring(1, match.Value.Length - 2))
                                             .ToList();
         }
+        
+        internal VideoCard(JToken apiResponse) : base(apiResponse)
+        {
+            if (base.Code != 0) return;
+            //写入动态信息
+            //AV号
+            AvID = (long) (Card["aid"] ?? 0);
+            //标题
+            Title = Card["title"]?.ToString();
+            //视频封面链接
+            CoverUrl = Card["pic"]?.ToString();
+            //视频简介
+            Desc = Card["desc"]?.ToString();
+            //视频话题
+            MatchCollection QuotationMarkMatch = Regex.Matches(Card["dynamic"]?.ToString() ?? string.Empty, @"#.*?#");
+            CardDynamic = QuotationMarkMatch.Select(match => match.Value.Substring(1, match.Value.Length - 2))
+                                            .ToList();
+        }
 
         #endregion
 

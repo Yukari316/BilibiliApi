@@ -41,6 +41,21 @@ namespace BilibiliApi.Dynamic.Models.Card
                 ImgList.Add(url["img_src"]?.ToString() ?? "");
             }
         }
+        
+        internal TextAndPicCard(JToken apiResponse) : base(apiResponse)
+        {
+            if (base.Code != 0) return;
+            //写入动态信息
+            //描述
+            Description = Card["item"]?["description"]?.ToString();
+            //图片
+            ImgList = new List<string>();
+            JToken[] pictures = Card["item"]?["pictures"]?.ToArray() ?? JArray.Parse("[]").ToArray();
+            foreach (JToken url in pictures)
+            {
+                ImgList.Add(url["img_src"]?.ToString() ?? "");
+            }
+        }
 
         #endregion
 

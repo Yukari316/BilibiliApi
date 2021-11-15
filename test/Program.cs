@@ -1,5 +1,6 @@
 using System;
 using BilibiliApi.Video;
+using BilibiliApi.Dynamic;
 
 namespace test
 {
@@ -35,6 +36,10 @@ namespace test
 
             // //获取指定用户的最新动态
             // var cardData = DynamicAPIs.GetLatestDynamic(32472953);
+            #region 获取指定用户的动态
+
+            // //获取指定用户的最新动态
+            // var cardData = DynamicAPIs.GetLatestDynamic(8453668);
             // switch (cardData.cardType)
             // {
             //     case CardType.PlainText:
@@ -135,6 +140,15 @@ namespace test
             // //源数据
             // // Console.WriteLine($"\n\nsource data:{cardData}");
             // Console.ReadLine();
+
+            #endregion
+
+            #region 获取单一指定动态
+
+            // var (data, type) = DynamicAPIs.GetDynamic(547628980443227402);
+            // Console.WriteLine();
+
+            #endregion
 
             #endregion
 
