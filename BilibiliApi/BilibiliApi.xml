@@ -142,6 +142,11 @@
             </summary>
             <param name="orginCardType">源动态类型</param>
         </member>
+        <member name="M:BilibiliApi.Dynamic.Models.Card.ForwardCard.GetOriginCard">
+            <summary>
+            获取转发源内容
+            </summary>
+        </member>
         <member name="T:BilibiliApi.Dynamic.Models.Card.PlainTextCard">
             <summary>
             纯文本类型动态
@@ -615,6 +620,12 @@
             获取直播间信息链接
             </summary>
             <param name="userId">用户ID</param>
+        </member>
+        <member name="M:BilibiliApi.Util.ToDateTime(System.Int64)">
+            <summary>
+            时间戳转DateTime
+            <param name="timeStamp">时间戳</param>
+            </summary>
         </member>
         <member name="T:BilibiliApi.Video.Models.VideoInfo">
             <summary>

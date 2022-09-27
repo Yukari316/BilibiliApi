@@ -1,6 +1,9 @@
 using System;
 using BilibiliApi.Video;
 using BilibiliApi.Dynamic;
+using BilibiliApi.Live;
+using BilibiliApi.Live.Models;
+using BilibiliApi.User;
 
 namespace test
 {
@@ -10,25 +13,25 @@ namespace test
         {
             #region UserAPI
 
-            // var userInfo = UserApis.GetLiveRoomInfo(592761);
-            // Console.WriteLine($"API Return Code = {userInfo.Code}");
-            // Console.WriteLine($"User Name = {userInfo.Name}");
-            // Console.WriteLine($"User Level = {userInfo.Level}");
-            // Console.WriteLine($"User FaceUrl = {userInfo.FaceUrl}");
+            var userInfo = UserApis.GetLiveRoomInfo(2123631024);
+            Console.WriteLine($"API Return Code = {userInfo.Code}");
+            Console.WriteLine($"User Name = {userInfo.Name}");
+            Console.WriteLine($"User Level = {userInfo.Level}");
+            Console.WriteLine($"User FaceUrl = {userInfo.FaceUrl}");
 
             #endregion
 
             #region LiveAPI
 
-            // LiveStatus liveStatus = LiveAPIs.GetLiveStatus(48039);
-            // Console.WriteLine($"live status:{liveStatus.Status}");
-            // Console.WriteLine($"live room id:{liveStatus.UrlId}");
-            // Console.ReadLine();
-            // LiveInfo liveInfo = LiveAPIs.GetLiveRoomInfo(21448649);
-            // Console.WriteLine($"API Return Code = {liveInfo.Code}");
-            // Console.WriteLine($"Liver uid = {liveInfo.UserId}");
-            // Console.WriteLine($"Live room status = {liveInfo.LiveStatus}");
-            // Console.ReadLine();
+            LiveStatus liveStatus = LiveAPIs.GetLiveStatus(2123631024);
+            Console.WriteLine($"live status:{liveStatus.Status}");
+            Console.WriteLine($"live room id:{liveStatus.RoomId}");
+            Console.ReadLine();
+            LiveInfo liveInfo = LiveAPIs.GetLiveRoomInfo(22865391);
+            Console.WriteLine($"API Return Code = {liveInfo.Code}");
+            Console.WriteLine($"Liver uid = {liveInfo.UserId}");
+            Console.WriteLine($"Live room status = {liveInfo.LiveStatus}");
+            Console.ReadLine();
 
             #endregion
 
@@ -154,8 +157,8 @@ namespace test
 
             #region VideoAPI
 
-            var vInfo = VideoApis.GetVideoInfo("BV1Hp4y147NQ");
-            Console.WriteLine(vInfo.Title);
+            // var vInfo = VideoApis.GetVideoInfo("BV1Hp4y147NQ");
+            // Console.WriteLine(vInfo.Title);
 
             #endregion
         }
