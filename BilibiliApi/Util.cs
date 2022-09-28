@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using Newtonsoft.Json.Linq;
 
 namespace BilibiliApi
 {
@@ -16,6 +17,15 @@ namespace BilibiliApi
         {
             var unixStartTime = new DateTime(1970, 1, 1, 8, 0, 0, 0);
             return unixStartTime.AddSeconds(timeStamp);
+        }
+
+        internal static bool IsLiveDynamic(JToken data)
+        {
+            if (!(data["modules"]?["module_dynamic"]?["major"]?.HasValues ?? false))
+            {
+                return false;
+            }
+            return (data["modules"]?["module_dynamic"]?["major"]?["type"]?.ToString() ?? string.Empty) == "MAJOR_TYPE_LIVE_RCMD";
         }
     }
 }

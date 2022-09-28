@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using BilibiliApi.Models;
 using BilibiliApi.Video.Models;
 using Newtonsoft.Json.Linq;
+// ReSharper disable PossibleMultipleEnumeration
 
 namespace BilibiliApi;
 
@@ -68,7 +69,8 @@ public static class BiliApis
                 return new LiveInfo($"net error code[{(int)response.StatusCode}]");
 
             JToken responseData = JToken.Parse(await response.Content.ReadAsStringAsync());
-            if (responseData["code"]?.ToString() != "0") return new LiveInfo($"api error code[{responseData["code"]}]");
+            if (responseData["code"]?.ToString() != "0") 
+                return new LiveInfo($"api error code[{responseData["code"]}]");
 
             return new LiveInfo(JToken.Parse(await response.Content.ReadAsStringAsync()));
         }
@@ -99,13 +101,25 @@ public static class BiliApis
             JToken responseData = JToken.Parse(await response.Content.ReadAsStringAsync());
             if (responseData["code"]?.ToString() != "0") return (0, 0);
 
+            JArray items = responseData["data"]?["items"] as JArray;
+            if (items is null) return (0, 0);
 
-            //判断置顶
-            return responseData["data"]?["items"]?[0]?["modules"]?["module_tag"]?["text"]?.ToString() == "置顶"
-                ? (Convert.ToUInt64(responseData["data"]?["items"]?[1]?["id_str"] ?? 0),
-                    Convert.ToInt64(responseData["data"]?["items"]?[1]?["modules"]?["module_author"]?["pub_ts"] ?? 0))
-                : (Convert.ToUInt64(responseData["data"]?["items"]?[0]?["id_str"] ?? 0),
-                    Convert.ToInt64(responseData["data"]?["items"]?[0]?["modules"]?["module_author"]?["pub_ts"] ?? 0));
+            //移除置顶
+            if (responseData["data"]?["items"]?[0]?["modules"]?["module_tag"]?["text"]?.ToString() == "置顶")
+            {
+                items.RemoveAt(0);
+            }
+            //移除直播动态
+            IEnumerable<JToken> exp = items.Where(Util.IsLiveDynamic);
+            if (exp.Any())
+            {
+                var rmItems = exp.ToList();
+                foreach (JToken item in rmItems)
+                    items.Remove(item);
+            }
+
+            return (Convert.ToUInt64(responseData["data"]?["items"]?[0]?["id_str"] ?? 0),
+                Convert.ToInt64(responseData["data"]?["items"]?[0]?["modules"]?["module_author"]?["pub_ts"] ?? 0));
         }
         //出现错误时将重构json信息
         catch
