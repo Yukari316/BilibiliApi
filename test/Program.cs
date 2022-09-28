@@ -30,7 +30,7 @@ internal class Program
 #region 动态API
 
         //获取指定用户的最新动态ID
-        ulong did = await BiliApis.GetLatestDynamicId(1900434152);
+        (ulong did, long ts) = await BiliApis.GetLatestDynamicId(1900434152);
         Console.WriteLine($"did = {did}");
 
 #endregion
