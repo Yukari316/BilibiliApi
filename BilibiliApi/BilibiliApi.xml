@@ -39,305 +39,14 @@
             动态类的API
             </summary>
         </member>
-        <member name="M:BilibiliApi.Dynamic.DynamicAPIs.GetLatestDynamic(System.Int64,System.Int32,System.String)">
+        <member name="M:BilibiliApi.Dynamic.DynamicAPIs.GetLatestDynamicId(System.Int64)">
             <summary>
             从服务器获取最新的动态数据
             </summary>
             <param name="uid">用户ID</param>
-            <param name="index">想要获取动态的位置(最大值11),默认为0(最新动态)</param>
-            <param name="pageOffset">动态页offset</param>
             <returns>
             动态数据和动态类型
             </returns>
-        </member>
-        <member name="M:BilibiliApi.Dynamic.DynamicAPIs.GetDynamic(System.UInt64)">
-            <summary>
-            通过动态ID获取指定动态的内容
-            </summary>
-            <param name="dynamicId">动态ID</param>
-        </member>
-        <member name="T:BilibiliApi.Dynamic.Enums.CardType">
-            <summary>
-            动态卡片类型
-            </summary>
-        </member>
-        <member name="F:BilibiliApi.Dynamic.Enums.CardType.Error">
-            <summary>
-            错误
-            </summary>
-        </member>
-        <member name="F:BilibiliApi.Dynamic.Enums.CardType.Unknown">
-            <summary>
-            未知类型
-            </summary>
-        </member>
-        <member name="F:BilibiliApi.Dynamic.Enums.CardType.Forward">
-            <summary>
-            转发
-            </summary>
-        </member>
-        <member name="F:BilibiliApi.Dynamic.Enums.CardType.TextAndPic">
-            <summary>
-            图片动态
-            </summary>
-        </member>
-        <member name="F:BilibiliApi.Dynamic.Enums.CardType.PlainText">
-            <summary>
-            纯文本动态
-            </summary>
-        </member>
-        <member name="F:BilibiliApi.Dynamic.Enums.CardType.Video">
-            <summary>
-            视频动态
-            </summary>
-        </member>
-        <member name="F:BilibiliApi.Dynamic.Enums.CardType.Column">
-            <summary>
-            专栏
-            </summary>
-        </member>
-        <member name="T:BilibiliApi.Dynamic.Models.Card.ForwardCard">
-            <summary>
-            转发动态
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Card.ForwardCard.Content">
-            <summary>
-            <para>动态内容</para>
-            <para>[字段:JSON.item.content]</para>
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Card.ForwardCard.OrginDynamicId">
-            <summary>
-            <para>源动态链接</para>
-            <para>[字段:JSON.item.orig_dy_id]</para>
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Card.ForwardCard.OrginType">
-            <summary>
-            <para>源动态类型</para>
-            <para>[字段:JSON.item.orig_type]</para>
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Card.ForwardCard.OrginJson">
-            <summary>
-            <para>源动态JSON</para>
-            <para>[字段:JSON.origin]</para>
-            </summary>
-        </member>
-        <member name="M:BilibiliApi.Dynamic.Models.Card.ForwardCard.ToString">
-            <summary>
-            将动态转换为格式化文本
-            </summary>
-        </member>
-        <member name="M:BilibiliApi.Dynamic.Models.Card.ForwardCard.GetOrginUrl(BilibiliApi.Dynamic.Enums.CardType@)">
-            <summary>
-            获取源动态的链接
-            </summary>
-            <param name="orginCardType">源动态类型</param>
-        </member>
-        <member name="M:BilibiliApi.Dynamic.Models.Card.ForwardCard.GetOrginJson(BilibiliApi.Dynamic.Enums.CardType@)">
-            <summary>
-            获取源动态的数据
-            </summary>
-            <param name="orginCardType">源动态类型</param>
-        </member>
-        <member name="M:BilibiliApi.Dynamic.Models.Card.ForwardCard.GetOriginCard">
-            <summary>
-            获取转发源内容
-            </summary>
-        </member>
-        <member name="T:BilibiliApi.Dynamic.Models.Card.PlainTextCard">
-            <summary>
-            纯文本类型动态
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Card.PlainTextCard.Content">
-            <summary>
-            <para>动态内容</para>
-            <para>[字段:JSON.item.content]</para>
-            </summary>
-        </member>
-        <member name="M:BilibiliApi.Dynamic.Models.Card.PlainTextCard.ToString">
-            <summary>
-            获取动态的文本
-            </summary>
-            <returns>将数据转换为格式化文本</returns>
-        </member>
-        <member name="T:BilibiliApi.Dynamic.Models.Card.TextAndPicCard">
-            <summary>
-            图片动态
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Card.TextAndPicCard.Description">
-            <summary>
-            <para>动态内容</para>
-            <para>[字段:JSON.item.description]</para>
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Card.TextAndPicCard.ImgList">
-            <summary>
-            <para>图片链接</para>
-            <para>[字段:JSON.item.pictures]</para>
-            </summary>
-        </member>
-        <member name="M:BilibiliApi.Dynamic.Models.Card.TextAndPicCard.ToString">
-            <summary>
-            获取动态的文本
-            </summary>
-            <returns>将数据转换为文本</returns>
-        </member>
-        <member name="T:BilibiliApi.Dynamic.Models.Card.VideoCard">
-            <summary>
-            视频动态
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Card.VideoCard.AvID">
-            <summary>
-            <para>AV号</para>
-            <para>[字段:JSON.aid]</para>
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Card.VideoCard.Title">
-            <summary>
-            <para>视频标题</para>
-            <para>[字段:JSON.title]</para>
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Card.VideoCard.CoverUrl">
-            <summary>
-            <para>封面链接</para>
-            <para>[字段:JSON.pic]</para>
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Card.VideoCard.Desc">
-            <summary>
-            <para>视频简介</para>
-            <para>[字段:JSON.desc]</para>
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Card.VideoCard.CardDynamic">
-            <summary>
-            <para>视频话题</para>
-            <para>[字段:JSON.dynamic]</para>
-            </summary>
-        </member>
-        <member name="M:BilibiliApi.Dynamic.Models.Card.VideoCard.ToString">
-            <summary>
-            将动态转换为格式化文本
-            </summary>
-        </member>
-        <member name="M:BilibiliApi.Dynamic.Models.Card.VideoCard.GetAvUrl">
-            <summary>
-            获取视频链接
-            </summary>
-        </member>
-        <member name="T:BilibiliApi.Dynamic.Models.Dynamic">
-            <summary>
-            动态数据类型
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Dynamic.Uid">
-            <summary>
-            <para>发送者ID</para>
-            <para>[字段:JSON.data.cards[n].desc.uid]</para>
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Dynamic.DynamicId">
-            <summary>
-            <para>动态的ID</para>
-            <para>[字段:JSON.data.cards[n].desc.dynamic_id_str]</para>
-            <para>这个值实在是太长了就用字符串存吧</para>
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Dynamic.UpdateTime">
-            <summary>
-            <para>动态更新时间</para>
-            <para>[需要由时间戳转换]</para>
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Dynamic.UpdateTimeStemp">
-            <summary>
-            <para>动态更新时间戳</para>
-            <para>[字段:JSON.data.cards[n].desc.timestamp]</para>
-            <para>仅用于设置时间，会自动转换为UpdateTime[DateTime]</para>
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Dynamic.UserName">
-            <summary>
-            <para>动态所属用户名称</para>
-            <para>[字段:JSON.data.cards[n].desc.user_profile.info.uname]</para>
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Dynamic.FaceUrl">
-            <summary>
-            <para>用户头像的图片链接</para>
-            <para>[字段:JSON.data.cards[n].desc.user_profile.info.face]</para>
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Dynamic.EmojiData">
-            <summary>
-            <para>动态中Emoji的数据</para>
-            <para>Key:EmojiText[JSON.data.cards[0].display.emoji_info.emoji_details[n].text]</para>
-            <para>Value:EmojiUrl[JSON.data.cards[0].display.emoji_info.emoji_details[n].url]</para>
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Dynamic.CardType">
-            <summary>
-            <para>动态类型</para>
-            <para>[字段:JSON.data.cards[0].desc.type]</para>
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Dynamic.Card">
-            <summary>
-            <para>动态内容</para>
-            <para>[字段:JSON.data.cards[n].card]</para>
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Dynamic.ExtendJson">
-            <summary>
-            <para>额外信息</para>
-            <para>[字段:JSON.data.cards[n].extend_json]</para>
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Dynamic.Models.Dynamic.NextPageOffset">
-            <summary>
-            <para>第二页动态的offset</para>
-            <para>[字段:JSON.data.next_page]</para>
-            <para>此字段由框架自动添加</para>
-            </summary>
-        </member>
-        <member name="M:BilibiliApi.Dynamic.Models.Dynamic.GetUserInfo">
-            <summary>
-            获取用户信息
-            </summary>
-            <returns>用户信息</returns>
-        </member>
-        <member name="M:BilibiliApi.Dynamic.Models.Dynamic.GetDynamicUrl">
-            <summary>
-            获取动态URL
-            </summary>
-            <returns>URL</returns>
-        </member>
-        <member name="M:BilibiliApi.Dynamic.Models.Dynamic.#ctor(Newtonsoft.Json.Linq.JToken,System.Int32)">
-            <summary>
-            初始化父数据
-            </summary>
-        </member>
-        <member name="M:BilibiliApi.Dynamic.Models.Dynamic.#ctor(Newtonsoft.Json.Linq.JToken)">
-            <summary>
-            初始化父数据
-            </summary>
-        </member>
-        <member name="M:BilibiliApi.Dynamic.Models.Dynamic.GetCardType(Newtonsoft.Json.Linq.JToken,System.Int32)">
-            <summary>
-            获取动态类型
-            </summary>
-        </member>
-        <member name="M:BilibiliApi.Dynamic.Models.Dynamic.GetCardType(Newtonsoft.Json.Linq.JToken)">
-            <summary>
-            获取单独一条动态的类型
-            </summary>
         </member>
         <member name="T:BilibiliApi.Dynamic.Models.UserInfo">
             <summary>
@@ -397,23 +106,11 @@
             直播间相关API
             </summary>
         </member>
-        <member name="M:BilibiliApi.Live.LiveAPIs.GetLiveStatusUrl(System.Int64)">
-            <summary>
-            获取直播状态链接
-            </summary>
-            <param name="uid">UID</param>
-        </member>
         <member name="M:BilibiliApi.Live.LiveAPIs.GetLiveRoomInfo(System.Int64)">
             <summary>
             获取直播间信息链接
             </summary>
             <param name="roomId">房间id(直播间真实ID)</param>
-        </member>
-        <member name="M:BilibiliApi.Live.LiveAPIs.GetLiveStatus(System.Int64)">
-            <summary>
-            获取直播间的最新状态
-            </summary>
-            <param name="uid">UID</param>
         </member>
         <member name="T:BilibiliApi.Live.Models.LiveInfo">
             <summary>
@@ -435,31 +132,19 @@
             用户ID
             </summary>
         </member>
-        <member name="P:BilibiliApi.Live.Models.LiveInfo.NeedP2P">
+        <member name="P:BilibiliApi.Live.Models.LiveInfo.Title">
             <summary>
-            是否p2p
+            直播间标题
+            </summary>
+        </member>
+        <member name="P:BilibiliApi.Live.Models.LiveInfo.Cover">
+            <summary>
+            封面
             </summary>
         </member>
         <member name="P:BilibiliApi.Live.Models.LiveInfo.LiveStatus">
             <summary>
             直播状态
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Live.Models.LiveInfo.Encrypted">
-            <summary>
-            房间是否加密
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Live.Models.LiveInfo.PasswdVerified">
-            <summary>
-            加密房间是否通过密码验证
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Live.Models.LiveInfo.LiveStartTimeStemp">
-            <summary>
-            <para>直播开始时间戳</para>
-            <para>[字段:JSON.data.cards[n].desc.timestamp]</para>
-            <para>仅用于设置时间，会自动转换为UpdateTime[DateTime]</para>
             </summary>
         </member>
         <member name="P:BilibiliApi.Live.Models.LiveInfo.LiveStartTime">
@@ -476,150 +161,6 @@
             <summary>
             初始化
             </summary>
-        </member>
-        <member name="T:BilibiliApi.Live.Models.LiveStatus">
-            <summary>
-            直播间状态信息
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Live.Models.LiveStatus.Status">
-            <summary>
-            直播状态
-            字段[JSON.data.status]
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Live.Models.LiveStatus.RoomId">
-            <summary>
-            直播间ID
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.Live.Models.LiveStatus.RoomUrl">
-            <summary>
-            直播间链接
-            字段[JSON.data.url]
-            </summary>
-        </member>
-        <member name="M:BilibiliApi.Live.Models.LiveStatus.#ctor(Newtonsoft.Json.Linq.JToken)">
-            <summary>
-            初始化
-            </summary>
-        </member>
-        <member name="M:BilibiliApi.Live.Models.LiveStatus.#ctor(System.String)">
-            <summary>
-            初始化
-            </summary>
-        </member>
-        <member name="T:BilibiliApi.User.Models.LiveRoomInfo">
-            <summary>
-            直播间信息
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.User.Models.LiveRoomInfo.HaveLiveRoom">
-            <summary>
-            是否有直播间
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.User.Models.LiveRoomInfo.Online">
-            <summary>
-            直播间在线状态
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.User.Models.LiveRoomInfo.RoundStatus">
-            <summary>
-            轮播状态
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.User.Models.LiveRoomInfo.LiveUrl">
-            <summary>
-            直播间链接
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.User.Models.LiveRoomInfo.Title">
-            <summary>
-            直播间标题
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.User.Models.LiveRoomInfo.CoverUrl">
-            <summary>
-            封面链接
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.User.Models.LiveRoomInfo.OnlineUser">
-            <summary>
-            人气
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.User.Models.LiveRoomInfo.ShortId">
-            <summary>
-            短ID
-            </summary>
-        </member>
-        <member name="M:BilibiliApi.User.Models.LiveRoomInfo.#ctor(Newtonsoft.Json.Linq.JToken)">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="T:BilibiliApi.User.Models.UserSpaceInfo">
-            <summary>
-            用户详细信息(空间)
-            (不完整信息解析)
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.User.Models.UserSpaceInfo.Name">
-            <summary>
-            昵称
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.User.Models.UserSpaceInfo.Sex">
-            <summary>
-            性别
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.User.Models.UserSpaceInfo.FaceUrl">
-            <summary>
-            头像
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.User.Models.UserSpaceInfo.Sign">
-            <summary>
-            签名
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.User.Models.UserSpaceInfo.Level">
-            <summary>
-            等级
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.User.Models.UserSpaceInfo.Silence">
-            <summary>
-            封禁状态
-            </summary>
-        </member>
-        <member name="P:BilibiliApi.User.Models.UserSpaceInfo.LiveRoomInfo">
-            <summary>
-            账户直播间信息
-            </summary>
-        </member>
-        <member name="M:BilibiliApi.User.Models.UserSpaceInfo.#ctor(Newtonsoft.Json.Linq.JToken)">
-            <summary>
-            初始化
-            </summary>
-        </member>
-        <member name="M:BilibiliApi.User.Models.UserSpaceInfo.#ctor(System.String)">
-            <summary>
-            初始化
-            </summary>
-        </member>
-        <member name="T:BilibiliApi.User.UserApis">
-            <summary>
-            用户类API
-            </summary>
-        </member>
-        <member name="M:BilibiliApi.User.UserApis.GetLiveRoomInfo(System.Int64)">
-            <summary>
-            获取直播间信息链接
-            </summary>
-            <param name="userId">用户ID</param>
         </member>
         <member name="M:BilibiliApi.Util.ToDateTime(System.Int64)">
             <summary>

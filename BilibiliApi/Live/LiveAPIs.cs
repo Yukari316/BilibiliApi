@@ -1,9 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Text;
+using System.Net.Http;
+using System.Threading.Tasks;
 using BilibiliApi.Live.Models;
-using PyLibSharp.Requests;
+using Newtonsoft.Json.Linq;
 
 namespace BilibiliApi.Live
 {
@@ -13,70 +13,24 @@ namespace BilibiliApi.Live
     public class LiveAPIs
     {
         /// <summary>
-        /// 获取直播状态链接
-        /// </summary>
-        /// <param name="uid">UID</param>
-        internal static string GetLiveStatusUrl(long uid)
-        {
-            StringBuilder urlBuilder = new StringBuilder();
-            urlBuilder.Append("http://api.live.bilibili.com/bili/living_v2/");
-            urlBuilder.Append(uid);
-            return urlBuilder.ToString();
-        }
-
-        /// <summary>
         /// 获取直播间信息链接
         /// </summary>
         /// <param name="roomId">房间id(直播间真实ID)</param>
-        public static LiveInfo GetLiveRoomInfo(long roomId)
+        public static async ValueTask<LiveInfo> GetLiveRoomInfo(long roomId)
         {
-            ReqResponse response;
             try
             {
-                response = Requests.Get("https://api.live.bilibili.com/xlive/web-room/v1/index/getRoomPlayInfo",
-                                        new ReqParams
-                                        {
-                                            Params = new Dictionary<string, string>
-                                            {
-                                                {"room_id", roomId.ToString()}
-                                            }
-                                        });
+                HttpResponseMessage response =
+                    await Util.PubHttpClient
+                              .GetAsync($"https://api.live.bilibili.com/room/v1/Room/get_info?room_id={roomId}");
+
+                return response.StatusCode != HttpStatusCode.OK
+                    ? new LiveInfo($"net error code[{(int)response.StatusCode}]")
+                    : new LiveInfo(JToken.Parse(await response.Content.ReadAsStringAsync()));
             }
             catch (Exception e)
             {
                 return new LiveInfo($"net error message:{e}");
-            }
-
-            return response.StatusCode != HttpStatusCode.OK
-                ? new LiveInfo($"net error code[{(int) response.StatusCode}]")
-                : new LiveInfo(response.Json());
-        }
-
-        /// <summary>
-        /// 获取直播间的最新状态
-        /// </summary>
-        /// <param name="uid">UID</param>
-        public static LiveStatus GetLiveStatus(long uid)
-        {
-            try
-            {
-                ReqResponse response;
-                try
-                {
-                    response = Requests.Get(GetLiveStatusUrl(uid));
-                }
-                catch (Exception e)
-                {
-                    return new LiveStatus($"Net error message:{e}");
-                }
-
-                return response.StatusCode != HttpStatusCode.OK
-                    ? new LiveStatus($"Net error code[{(int) response.StatusCode}]")
-                    : new LiveStatus(response.Json());
-            }
-            catch (Exception e)
-            {
-                return new LiveStatus(e.Message);
             }
         }
     }

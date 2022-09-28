@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using BilibiliApi.Video.Models;
-using PyLibSharp.Requests;
+using Newtonsoft.Json.Linq;
 
 namespace BilibiliApi.Video
 {
@@ -16,34 +17,29 @@ namespace BilibiliApi.Video
         /// <para>自动识别AV号和BV号</para>
         /// </summary>
         /// <param name="videoId">AV号/BV号</param>
-        public static VideoInfo GetVideoInfo(string videoId)
+        public static async ValueTask<VideoInfo> GetVideoInfo(string videoId)
         {
-            ReqResponse response;
-            var paraName = videoId[..2].ToLower() switch
-            {
-                "av" => "aid",
-                "bv" => "bvid",
-                _ => throw new ArgumentOutOfRangeException(nameof(videoId), "unknown id type")
-            };
+            var queryStr = videoId[..2].ToLower() switch
+                           {
+                               "av" => $"?aid={videoId[2..]}",
+                               "bv" => $"?bvid={videoId}",
+                               _    => throw new ArgumentOutOfRangeException(nameof(videoId), "unknown id type")
+                           };
 
             try
             {
-                response = Requests.Get("http://api.bilibili.com/x/web-interface/view", new ReqParams
-                {
-                    Params = new Dictionary<string, string>
-                    {
-                        {paraName, paraName == "aid" ? videoId[2..] : videoId}
-                    }
-                });
+                HttpResponseMessage response =
+                    await Util.PubHttpClient
+                              .GetAsync($"https://api.bilibili.com/x/web-interface/view{queryStr}");
+
+                return response.StatusCode != HttpStatusCode.OK
+                    ? new VideoInfo($"net error code[{(int)response.StatusCode}]")
+                    : new VideoInfo(JToken.Parse(await response.Content.ReadAsStringAsync()));
             }
             catch (Exception e)
             {
                 return new VideoInfo($"net error message:{e}");
             }
-
-            return response.StatusCode != HttpStatusCode.OK
-                ? new VideoInfo($"net error code[{(int) response.StatusCode}]")
-                : new VideoInfo(response.Json());
         }
     }
 }
