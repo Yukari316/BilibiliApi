@@ -1,4 +1,4 @@
-namespace BilibiliApi.Dynamic.Models
+namespace BilibiliApi.Models
 {
     /// <summary>
     /// 用户信息
@@ -24,6 +24,11 @@ namespace BilibiliApi.Dynamic.Models
         /// <para>[字段:JSON.data.cards[n].desc.user_profile.info.face]</para>
         /// </summary>
         public string FaceUrl { internal set; get; }
+
+        /// <summary>
+        /// 直播间ID
+        /// </summary>
+        public long LiveId { internal set; get; }
 
         #endregion
     }

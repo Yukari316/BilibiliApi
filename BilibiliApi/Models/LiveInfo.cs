@@ -5,14 +5,14 @@ using BilibiliApi.Live.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace BilibiliApi.Live.Models;
+namespace BilibiliApi.Models;
 
 /// <summary>
 /// 直播类型
 /// </summary>
 public class LiveInfo : BaseApiInfo
 {
-#region 属性
+    #region 属性
 
     /// <summary>
     /// 直播间真实ID
@@ -50,9 +50,9 @@ public class LiveInfo : BaseApiInfo
     /// </summary>
     public DateTime LiveStartTime { get; }
 
-#endregion
+    #endregion
 
-#region 构造函数
+    #region 构造函数
 
     /// <summary>
     /// 初始化
@@ -72,11 +72,11 @@ public class LiveInfo : BaseApiInfo
                 return;
             }
 
-            RoomId  = Convert.ToInt64(apiResponse["data"]?["room_id"] ?? -1);
+            RoomId = Convert.ToInt64(apiResponse["data"]?["room_id"] ?? -1);
             ShortId = Convert.ToInt64(apiResponse["data"]?["short_id"] ?? -1);
-            UserId  = Convert.ToInt64(apiResponse["data"]?["uid"] ?? -1);
-            Title   = apiResponse["data"]?["title"]?.ToString() ?? string.Empty;
-            Cover   = apiResponse["data"]?["user_cover"]?.ToString() ?? string.Empty;
+            UserId = Convert.ToInt64(apiResponse["data"]?["uid"] ?? -1);
+            Title = apiResponse["data"]?["title"]?.ToString() ?? string.Empty;
+            Cover = apiResponse["data"]?["user_cover"]?.ToString() ?? string.Empty;
             Console.WriteLine(apiResponse["data"]?["live_time"]?.ToString());
             if (DateTime.TryParseExact(apiResponse["data"]?["live_time"]?.ToString() ?? "0001-01-01 01:01:01",
                                        "yyyy-MM-dd HH:mm:ss",
@@ -104,5 +104,5 @@ public class LiveInfo : BaseApiInfo
     {
     }
 
-#endregion
+    #endregion
 }
