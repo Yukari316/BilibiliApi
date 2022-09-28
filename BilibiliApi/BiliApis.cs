@@ -88,7 +88,7 @@ namespace BilibiliApi
         /// <returns>
         /// 动态数据和动态类型
         /// </returns>
-        public static async ValueTask<ulong> GetLatestDynamicId(long uid)
+        public static async ValueTask<(ulong dId, long pubTs)> GetLatestDynamicId(long uid)
         {
             //响应JSON
             try
@@ -97,7 +97,7 @@ namespace BilibiliApi
                     await Util.PubHttpClient
                               .GetAsync($"https://api.bilibili.com/x/polymer/web-dynamic/v1/feed/space?host_mid={uid}");
 
-                if (response.StatusCode != HttpStatusCode.OK) return 0;
+                if (response.StatusCode != HttpStatusCode.OK) return (0, 0);
 
                 JToken responseData = JToken.Parse(await response.Content.ReadAsStringAsync());
                 if (responseData["code"]?.ToString() != "0")
@@ -105,10 +105,12 @@ namespace BilibiliApi
                     return 0;
                 }
 
+
+
                 //判断置顶
                 return responseData["data"]?["items"]?[0]?["modules"]?["module_tag"]?["text"]?.ToString() == "置顶"
-                    ? Convert.ToUInt64(responseData["data"]?["items"]?[1]?["id_str"] ?? 0)
-                    : Convert.ToUInt64(responseData["data"]?["items"]?[0]?["id_str"] ?? 0);
+                    ? (Convert.ToUInt64(responseData["data"]?["items"]?[1]?["id_str"] ?? 0), Convert.ToInt64(responseData["data"]?["items"]?[1]?["modules"]?["module_author"]?["pub_ts"] ?? 0))
+                    : (Convert.ToUInt64(responseData["data"]?["items"]?[0]?["id_str"] ?? 0), Convert.ToInt64(responseData["data"]?["items"]?[0]?["modules"]?["module_author"]?["pub_ts"] ?? 0));
             }
             //出现错误时将重构json信息
             catch
