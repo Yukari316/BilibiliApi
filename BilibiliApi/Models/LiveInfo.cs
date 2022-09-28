@@ -77,7 +77,6 @@ public class LiveInfo : BaseApiInfo
             UserId = Convert.ToInt64(apiResponse["data"]?["uid"] ?? -1);
             Title = apiResponse["data"]?["title"]?.ToString() ?? string.Empty;
             Cover = apiResponse["data"]?["user_cover"]?.ToString() ?? string.Empty;
-            Console.WriteLine(apiResponse["data"]?["live_time"]?.ToString());
             if (DateTime.TryParseExact(apiResponse["data"]?["live_time"]?.ToString() ?? "0001-01-01 01:01:01",
                                        "yyyy-MM-dd HH:mm:ss",
                                        CultureInfo.InvariantCulture,
