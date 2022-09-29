@@ -68,16 +68,33 @@ namespace BilibiliApi.Video.Models
         /// </summary>
         internal VideoInfo(JToken apiResponse) : base(apiResponse)
         {
-            Aid         = Convert.ToInt64(apiResponse["data"]?["aid"] ?? -1);
-            Bid         = apiResponse["data"]?["bvid"]?.ToString()           ?? string.Empty;
-            Title       = apiResponse["data"]?["title"]?.ToString()          ?? string.Empty;
-            Desc        = apiResponse["data"]?["desc"]?.ToString()           ?? string.Empty;
-            CoverUrl    = apiResponse["data"]?["pic"]?.ToString()            ?? string.Empty;
-            AuthName    = apiResponse["data"]?["owner"]?["name"]?.ToString() ?? string.Empty;
-            AuthUid     = Convert.ToInt64(apiResponse["data"]?["owner"]?["mid"] ?? -1);
-            PublishTime = Convert.ToInt64(apiResponse["data"]?["pubdate"]       ?? -1).ToDateTime();
-            LikeCount   = Convert.ToInt32(apiResponse["data"]?["stat"]?["like"] ?? -1);
-            CoinCount   = Convert.ToInt32(apiResponse["data"]?["stat"]?["coin"] ?? -1);
+            try
+            {
+                if (apiResponse == null) throw new NullReferenceException("response data is null");
+                //检查code值
+                string code = apiResponse["code"]?.ToString();
+                if (code is not "0")
+                {
+                    return;
+                }
+
+                Aid         = Convert.ToInt64(apiResponse["data"]?["aid"] ?? -1);
+                Bid         = apiResponse["data"]?["bvid"]?.ToString()           ?? string.Empty;
+                Title       = apiResponse["data"]?["title"]?.ToString()          ?? string.Empty;
+                Desc        = apiResponse["data"]?["desc"]?.ToString()           ?? string.Empty;
+                CoverUrl    = apiResponse["data"]?["pic"]?.ToString()            ?? string.Empty;
+                AuthName    = apiResponse["data"]?["owner"]?["name"]?.ToString() ?? string.Empty;
+                AuthUid     = Convert.ToInt64(apiResponse["data"]?["owner"]?["mid"] ?? -1);
+                PublishTime = Convert.ToInt64(apiResponse["data"]?["pubdate"]       ?? -1).ToDateTime();
+                LikeCount   = Convert.ToInt32(apiResponse["data"]?["stat"]?["like"] ?? -1);
+                CoinCount   = Convert.ToInt32(apiResponse["data"]?["stat"]?["coin"] ?? -1);
+            }
+            catch (Exception e)
+            {
+                Code    = -1;
+                Message = e.Message;
+                TTL     = -1;
+            }
         }
 
         /// <summary>

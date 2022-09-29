@@ -60,13 +60,12 @@ public class LiveInfo : BaseApiInfo
     internal LiveInfo(JToken apiResponse)
         : base(apiResponse)
     {
-        if (apiResponse == null) throw new NullReferenceException("response data is null");
-
         try
         {
+            if (apiResponse == null) throw new NullReferenceException("response data is null");
             //检查code值
             string code = apiResponse["code"]?.ToString();
-            if (code == null || !code.Equals("0"))
+            if (code is not "0")
             {
                 LiveStatus = LiveStatusType.Unknown;
                 return;
@@ -91,7 +90,9 @@ public class LiveInfo : BaseApiInfo
         }
         catch (Exception e)
         {
-            throw new JsonException("json parse error", e);
+            Code    = -1;
+            Message = e.Message;
+            TTL     = -1;
         }
     }
 

@@ -12,14 +12,13 @@ internal class Program
     {
 #region LiveAPI
 
-        // LiveInfo liveInfo = await BiliApis.GetLiveRoomInfo(213);
-        // Console.WriteLine($"API Return Code = {liveInfo.Code}");
-        // Console.WriteLine($"Liver uid = {liveInfo.UserId}");
-        // Console.WriteLine($"Live room status = {liveInfo.LiveStatus}");
-        // Console.WriteLine($"Live room t = {liveInfo.Title}");
-        // Console.WriteLine($"Live room c = {liveInfo.Cover}");
-        // Console.WriteLine($"Live room s_time = {liveInfo.LiveStartTime}");
-        // Console.ReadLine();
+        LiveInfo liveInfo = await BiliApis.GetLiveRoomInfo(213);
+        Console.WriteLine($"API Return Code = {liveInfo.Code}");
+        Console.WriteLine($"Liver uid = {liveInfo.UserId}");
+        Console.WriteLine($"Live room status = {liveInfo.LiveStatus}");
+        Console.WriteLine($"Live room t = {liveInfo.Title}");
+        Console.WriteLine($"Live room c = {liveInfo.Cover}");
+        Console.WriteLine($"Live room s_time = {liveInfo.LiveStartTime}");
 
 #endregion
 
@@ -33,15 +32,15 @@ internal class Program
 
 #region VideoAPI
 
-        // VideoInfo vInfo = await BiliApis.GetVideoInfo("BV1xe4y1b7N3");
-        // Console.WriteLine(vInfo.Title);
+        VideoInfo vInfo = await BiliApis.GetVideoInfo("BV1xe4y1b7N3");
+        Console.WriteLine(vInfo.Title);
 
 #endregion
 
 #region User
 
-        // UserInfo uInfo = await BiliApis.GetLiveUserInfo(5817596);
-        // Console.WriteLine(uInfo.LiveId);
+        UserInfo uInfo = await BiliApis.GetLiveUserInfo(5817596);
+        Console.WriteLine(uInfo.LiveId);
 
 #endregion
     }

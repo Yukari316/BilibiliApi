@@ -14,17 +14,17 @@ namespace BilibiliApi.BaseModel
         /// <summary>
         /// API执行返回值
         /// </summary>
-        public int Code { get; }
+        public int Code { get; internal set; }
 
         /// <summary>
         /// API消息
         /// </summary>
-        public string Message { get; }
+        public string Message { get; internal set; }
 
         /// <summary>
         /// TTL
         /// </summary>
-        public int TTL { get; }
+        public int TTL { get; internal set; }
 
         #endregion
 

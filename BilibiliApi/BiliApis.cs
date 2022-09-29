@@ -89,7 +89,6 @@ public static class BiliApis
     /// </returns>
     public static async ValueTask<(ulong dId, long pubTs)> GetLatestDynamicId(long uid)
     {
-        //响应JSON
         try
         {
             HttpResponseMessage response =
@@ -121,7 +120,6 @@ public static class BiliApis
             return (Convert.ToUInt64(responseData["data"]?["items"]?[0]?["id_str"] ?? 0),
                 Convert.ToInt64(responseData["data"]?["items"]?[0]?["modules"]?["module_author"]?["pub_ts"] ?? 0));
         }
-        //出现错误时将重构json信息
         catch
         {
             return (0, 0);
@@ -145,20 +143,11 @@ public static class BiliApis
 
             JToken responseData = JToken.Parse(await response.Content.ReadAsStringAsync());
 
-            if (responseData["code"]?.ToString() != "0") return null;
-
-            return new UserInfo
-            {
-                Uid      = uid,
-                UserName = responseData["data"]?["info"]?["uname"]?.ToString() ?? string.Empty,
-                FaceUrl  = responseData["data"]?["info"]?["face"]?.ToString() ?? string.Empty,
-                LiveId   = Convert.ToInt64(responseData["data"]?["room_id"] ?? 0)
-            };
+            return new UserInfo(responseData, uid);
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            throw;
+            return new UserInfo(e.Message);
         }
     }
 }
