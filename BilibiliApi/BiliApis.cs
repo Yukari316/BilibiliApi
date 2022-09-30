@@ -41,10 +41,10 @@ public static class BiliApis
                 return (new VideoInfo($"net error code[{(int)response.StatusCode}]"), null);
 
             JToken responseData = JToken.Parse(await response.Content.ReadAsStringAsync());
-            if (responseData["code"]?.ToString() != "0")
-                return (new VideoInfo($"api error code[{responseData["code"]}]"), responseData);
 
-            return (new VideoInfo(JToken.Parse(await response.Content.ReadAsStringAsync())), responseData);
+            return responseData["code"]?.ToString() != "0"
+                ? (new VideoInfo($"api error code[{responseData["code"]}]"), responseData)
+                : (new VideoInfo(JToken.Parse(await response.Content.ReadAsStringAsync())), responseData);
         }
         catch (Exception e)
         {
@@ -68,10 +68,10 @@ public static class BiliApis
                 return (new LiveInfo($"net error code[{(int)response.StatusCode}]"), null);
 
             JToken responseData = JToken.Parse(await response.Content.ReadAsStringAsync());
-            if (responseData["code"]?.ToString() != "0")
-                return (new LiveInfo($"api error code[{responseData["code"]}]"), responseData);
 
-            return (new LiveInfo(JToken.Parse(await response.Content.ReadAsStringAsync())), responseData);
+            return responseData["code"]?.ToString() != "0"
+                ? (new LiveInfo($"api error code[{responseData["code"]}]"), responseData)
+                : (new LiveInfo(JToken.Parse(await response.Content.ReadAsStringAsync())), responseData);
         }
         catch (Exception e)
         {
@@ -86,7 +86,7 @@ public static class BiliApis
     /// <returns>
     /// 动态数据和动态类型
     /// </returns>
-    public static async ValueTask<(ulong dId, long pubTs, JToken json)> GetLatestDynamicId(long uid)
+    public static async ValueTask<(ulong dId, long pubTs, JToken dynamicJson)> GetLatestDynamicId(long uid)
     {
         try
         {
@@ -99,8 +99,8 @@ public static class BiliApis
             JToken responseData = JToken.Parse(await response.Content.ReadAsStringAsync());
             if (responseData["code"]?.ToString() != "0") return (0, 0, null);
 
-            JArray items = responseData["data"]?["items"] as JArray;
-            if (items is null) return (0, 0, responseData);
+            if (responseData["data"]?["items"] is not JArray items) 
+                return (0, 0, responseData);
 
             //移除置顶
             if (responseData["data"]?["items"]?[0]?["modules"]?["module_tag"]?["text"]?.ToString() == "置顶")
@@ -109,14 +109,14 @@ public static class BiliApis
             IEnumerable<JToken> exp = items.Where(Util.IsLiveDynamic);
             if (exp.Any())
             {
-                var rmItems = exp.ToList();
+                List<JToken> rmItems = exp.ToList();
                 foreach (JToken item in rmItems)
                     items.Remove(item);
             }
 
             return (Convert.ToUInt64(responseData["data"]?["items"]?[0]?["id_str"] ?? 0),
                 Convert.ToInt64(responseData["data"]?["items"]?[0]?["modules"]?["module_author"]?["pub_ts"] ?? 0),
-                responseData);
+                responseData["data"]?["items"]?[0]);
         }
         catch
         {
