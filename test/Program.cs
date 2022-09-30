@@ -12,7 +12,7 @@ internal class Program
     {
 #region LiveAPI
 
-        LiveInfo liveInfo = await BiliApis.GetLiveRoomInfo(213);
+        (LiveInfo liveInfo, _) = await BiliApis.GetLiveRoomInfo(213);
         Console.WriteLine($"API Return Code = {liveInfo.Code}");
         Console.WriteLine($"Liver uid = {liveInfo.UserId}");
         Console.WriteLine($"Live room status = {liveInfo.LiveStatus}");
@@ -25,21 +25,21 @@ internal class Program
 #region 动态API
 
         //获取指定用户的最新动态ID
-        (ulong did, long ts) = await BiliApis.GetLatestDynamicId(48039);
+        (ulong did, _, _) = await BiliApis.GetLatestDynamicId(48039);
         Console.WriteLine($"did = {did}");
 
 #endregion
 
 #region VideoAPI
 
-        VideoInfo vInfo = await BiliApis.GetVideoInfo("BV1xe4y1b7N3");
+        (VideoInfo vInfo, _) = await BiliApis.GetVideoInfo("BV1xe4y1b7N3");
         Console.WriteLine(vInfo.Title);
 
 #endregion
 
 #region User
 
-        UserInfo uInfo = await BiliApis.GetLiveUserInfo(5817596);
+        (UserInfo uInfo, _) = await BiliApis.GetLiveUserInfo(5817596);
         Console.WriteLine(uInfo.LiveId);
 
 #endregion

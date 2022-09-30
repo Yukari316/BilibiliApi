@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using BilibiliApi.Models;
 using BilibiliApi.Video.Models;
 using Newtonsoft.Json.Linq;
+
 // ReSharper disable PossibleMultipleEnumeration
 
 namespace BilibiliApi;
@@ -23,7 +22,7 @@ public static class BiliApis
     /// <para>自动识别AV号和BV号</para>
     /// </summary>
     /// <param name="videoId">AV号/BV号</param>
-    public static async ValueTask<VideoInfo> GetVideoInfo(string videoId)
+    public static async ValueTask<(VideoInfo info, JToken json)> GetVideoInfo(string videoId)
     {
         var queryStr = videoId[..2].ToLower() switch
                        {
@@ -39,17 +38,17 @@ public static class BiliApis
                           .GetAsync($"https://api.bilibili.com/x/web-interface/view{queryStr}");
 
             if (response.StatusCode != HttpStatusCode.OK)
-                return new VideoInfo($"net error code[{(int)response.StatusCode}]");
+                return (new VideoInfo($"net error code[{(int)response.StatusCode}]"), null);
 
             JToken responseData = JToken.Parse(await response.Content.ReadAsStringAsync());
             if (responseData["code"]?.ToString() != "0")
-                return new VideoInfo($"api error code[{responseData["code"]}]");
+                return (new VideoInfo($"api error code[{responseData["code"]}]"), responseData);
 
-            return new VideoInfo(JToken.Parse(await response.Content.ReadAsStringAsync()));
+            return (new VideoInfo(JToken.Parse(await response.Content.ReadAsStringAsync())), responseData);
         }
         catch (Exception e)
         {
-            return new VideoInfo($"net error message:{e}");
+            return (new VideoInfo($"net error message:{e}"), null);
         }
     }
 
@@ -57,7 +56,7 @@ public static class BiliApis
     /// 获取直播间信息链接
     /// </summary>
     /// <param name="roomId">房间id(直播间真实ID)</param>
-    public static async ValueTask<LiveInfo> GetLiveRoomInfo(long roomId)
+    public static async ValueTask<(LiveInfo info, JToken json)> GetLiveRoomInfo(long roomId)
     {
         try
         {
@@ -66,17 +65,17 @@ public static class BiliApis
                           .GetAsync($"https://api.live.bilibili.com/room/v1/Room/get_info?room_id={roomId}");
 
             if (response.StatusCode != HttpStatusCode.OK)
-                return new LiveInfo($"net error code[{(int)response.StatusCode}]");
+                return (new LiveInfo($"net error code[{(int)response.StatusCode}]"), null);
 
             JToken responseData = JToken.Parse(await response.Content.ReadAsStringAsync());
-            if (responseData["code"]?.ToString() != "0") 
-                return new LiveInfo($"api error code[{responseData["code"]}]");
+            if (responseData["code"]?.ToString() != "0")
+                return (new LiveInfo($"api error code[{responseData["code"]}]"), responseData);
 
-            return new LiveInfo(JToken.Parse(await response.Content.ReadAsStringAsync()));
+            return (new LiveInfo(JToken.Parse(await response.Content.ReadAsStringAsync())), responseData);
         }
         catch (Exception e)
         {
-            return new LiveInfo($"net error message:{e}");
+            return (new LiveInfo($"net error message:{e}"), null);
         }
     }
 
@@ -87,7 +86,7 @@ public static class BiliApis
     /// <returns>
     /// 动态数据和动态类型
     /// </returns>
-    public static async ValueTask<(ulong dId, long pubTs)> GetLatestDynamicId(long uid)
+    public static async ValueTask<(ulong dId, long pubTs, JToken json)> GetLatestDynamicId(long uid)
     {
         try
         {
@@ -95,19 +94,17 @@ public static class BiliApis
                 await Util.PubHttpClient
                           .GetAsync($"https://api.bilibili.com/x/polymer/web-dynamic/v1/feed/space?host_mid={uid}");
 
-            if (response.StatusCode != HttpStatusCode.OK) return (0, 0);
+            if (response.StatusCode != HttpStatusCode.OK) return (0, 0, null);
 
             JToken responseData = JToken.Parse(await response.Content.ReadAsStringAsync());
-            if (responseData["code"]?.ToString() != "0") return (0, 0);
+            if (responseData["code"]?.ToString() != "0") return (0, 0, null);
 
             JArray items = responseData["data"]?["items"] as JArray;
-            if (items is null) return (0, 0);
+            if (items is null) return (0, 0, responseData);
 
             //移除置顶
             if (responseData["data"]?["items"]?[0]?["modules"]?["module_tag"]?["text"]?.ToString() == "置顶")
-            {
                 items.RemoveAt(0);
-            }
             //移除直播动态
             IEnumerable<JToken> exp = items.Where(Util.IsLiveDynamic);
             if (exp.Any())
@@ -118,11 +115,12 @@ public static class BiliApis
             }
 
             return (Convert.ToUInt64(responseData["data"]?["items"]?[0]?["id_str"] ?? 0),
-                Convert.ToInt64(responseData["data"]?["items"]?[0]?["modules"]?["module_author"]?["pub_ts"] ?? 0));
+                Convert.ToInt64(responseData["data"]?["items"]?[0]?["modules"]?["module_author"]?["pub_ts"] ?? 0),
+                responseData);
         }
         catch
         {
-            return (0, 0);
+            return (0, 0, null);
         }
     }
 
@@ -131,7 +129,7 @@ public static class BiliApis
     /// </summary>
     /// <param name="uid"></param>
     /// <returns></returns>
-    public static async ValueTask<UserInfo> GetLiveUserInfo(long uid)
+    public static async ValueTask<(UserInfo info, JToken json)> GetLiveUserInfo(long uid)
     {
         try
         {
@@ -139,15 +137,15 @@ public static class BiliApis
                 await Util.PubHttpClient
                           .GetAsync($"https://api.live.bilibili.com/live_user/v1/Master/info?uid={uid}");
 
-            if (response.StatusCode != HttpStatusCode.OK) return null;
+            if (response.StatusCode != HttpStatusCode.OK) return (null, null);
 
             JToken responseData = JToken.Parse(await response.Content.ReadAsStringAsync());
 
-            return new UserInfo(responseData, uid);
+            return (new UserInfo(responseData, uid), responseData);
         }
         catch (Exception e)
         {
-            return new UserInfo(e.Message);
+            return (new UserInfo(e.Message), null);
         }
     }
 }
